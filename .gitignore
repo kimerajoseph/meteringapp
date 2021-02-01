@@ -1,0 +1,11 @@
+/venv1/
+/DATA CAPTURE/
+/key pair/
+*.xlsx
+*.csv
+*.txt
+!requirements.txt
+*.docx
+/register/
+*.whl
+/venv/

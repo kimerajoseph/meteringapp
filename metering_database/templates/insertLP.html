@@ -1,0 +1,51 @@
+<body>
+<div class="LP">
+  <form action="{% url 'monthly_LP' %}" method="post" id="LPform" name="LPform" enctype="multipart/form-data">
+     {% csrf_token %}
+      <h2>Insert Meter Load Profile</h2>
+<input type="file" id="LP" name="LP" accept=".csv" >
+  <br>
+  <small>Upload LP CSV file</small>
+    <br>
+    <br>
+       <button type="submit">Submit LP files</button>
+
+  </form>
+</div>
+
+</body>
+
+
+<style>
+    h1{text-align: center; color: green; margin: auto; padding:100px;}
+
+    button:hover{color:white; background:crimson; border:crimson;}
+     .LP{width:80%;margin-left:10%;padding:5px;border-radius:20px;text-align:center;height:600px;border:2px solid black;}
+    .LP h2{font-size:2em; text-decoration:underline;text-align: center; color: black;}
+    .LP button {width:40%; font-size:1.5em; padding:10px;align:center;border: 2px solid green;
+    align:center;}
+    .LP input{padding:10px;align:center;width:80%;font-size:1.5em;}
+    .LP small{align:center;;color:black;font-size:1.2em;}
+</style>
+
+<script>
+    const LP = document.getElementById("LP")
+    const errorElement = document.getElementById("error")
+    const form = document.getElementById("LPform")
+
+    form.addEventListener('submit',(e) =>{
+  let messages = []
+  if (LP.value === '')
+  {alert("You have not uploaded a file")
+  e.preventDefault()}
+
+    var fileInput1 = document.getElementById('LP');
+    var filePath1 = fileInput1.value;
+    var allowedExtensions1 = /(\.csv)$/i;
+    if(fileInput1.value != '' && !allowedExtensions1.exec(filePath1)){
+      alert("Please upload csv files only")
+      e.preventDefault()
+    }
+
+  })
+</script>

@@ -1,0 +1,141 @@
+<body>
+<div style="text-align:right;margin-top:0em;margin-right:2em;" class="login">
+  <a href="homepage"><button type="submit" >Log Out</button></a>
+ <!-- {% if user.is_authenticated %}-->
+<h1>Welcome to UETCL Metering Portal: <span style="color:green;">{{user}}</span></h1>
+<!--{%endif%}-->
+</div>
+<div class="overall">
+  <div class="meter_rec">
+    <div class="csv_sub">
+ <form action="{% url 'fillform' %}" method="POST" name="form" id="form" class="form" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <h2>Insert Monthly Record using CSV files</h2>
+  <input type="file" id="myFile_m" name="filename_m" accept=".csv" >
+  <br>
+  <small>Upload Main Meter File Here</small>
+  <input type="file" id="myFile_c" name="filename_c" accept=".csv">
+  <br>
+  <small>Upload Check Meter File Here</small>
+  <h4 id="error" style="margin-left:40%;color:red;font-size:1.5em;"></h4>
+  <!--<input id="input_sub" type="submit" onclick="validation()" accept=".csv">-->
+     <!--<button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>-->
+  <button type="submit" onclick="submitfunction()">Submit CSV files</button>
+ </form>
+    </div>
+    <div class="other_rec">
+  <a href="success"><button type="submit" value="success">Insert Monthly Record Manually</button></a>
+<br>
+<a href="newmeter"><button type="submit" value="newmeter">Add New Metering Point</button></a>
+  <br>
+  <a href="new_LP"><button type="submit" value="new_LP">Insert Load Profile</button></a>
+
+<a href="querries"><button type="submit" value="querries">Run Querries</button></a>
+
+</div>
+  </div>
+</div>
+
+<div class="revenue">
+   <!-- <form action="{% url 'umeme' %}" name="revenue" id="revenue">-->
+       <!--  {% csrf_token %}-->
+    <h1>Generate Monthly Bills</h1>
+        <a href="umeme"><button type="submit" value="umeme">Umeme</button></a>
+   <!-- <select name="um1" id="um1" style="display:none">
+        <option value="umeme" selected></option>
+    </select>-->
+    <button>UEDCL</button>
+    <button>IPPs</button>
+    <button>PACKMECS</button>
+    <button>KRECS</button>
+    <button>BEL</button>
+       <!-- </form>-->
+</div>
+<!--<div class="footer">
+    Developed by JKM TECHNOLOGIES (U) LTD In Conjunction With UETCL
+    <br>
+    (c) 2020 JKM Technologies. All rights reserved
+
+</div>-->
+</body>
+<style>
+    /*Styling for revenue*/
+
+    .revenue{position:relative;min-height:500px}
+   <!-- .revenue #revenue{width:80%;align:center;text-align:center;height:400px;}-->
+    .revenue button{width:25%;display:inline-block;margin:2%;font-size:1.5em;padding:5px;border:2px solid crimson;}
+    .revenue h1{text-align:center;text-decoration:underline;font-size:2em;}
+     .footer{background:#4CAF50;height:50px;position:absolute;bottom:0px;text-align:center;width:100%;}
+
+</style>
+<style>
+
+    h1{font-size:1.5em;text-align: left; color: black; margin-top:auto; }
+.overall{}
+    button:hover{color:white; background:crimson; border:crimson;}
+    form{margin:auto;}
+    /*input{padding:10px;margin-left:40%;width:20%;font-size:1.3em;}*/
+    .login{width:100%;height:70px;background:crimson;}
+    .login button{width:10%;padding:5px;border:2px solid green;font-size:1.3em}
+    .csv_sub{background:#F4F6F7;width: 49%; float: left; height:400px;padding:0px;border-radius:20px; border:2px solid black;margin:2px;}
+    .other_rec{background:#6BA579 ;width: 49%;float: left;height:400px;align:center;border-radius:20px; border:2px solid black;margin:2px;}
+    .meter_rec{padding:5px;height:410px;margin-top:5%; }
+    .other_rec button{width:80%; font-size:2em;margin-left:10%;margin-top:3%;padding:10px;}
+    .meter_rec .form input{padding:10px;margin-left:10%;width:80%;font-size:1.7em;}
+    .meter_rec .form h2{margin-top:0px;font-size:2em; text-decoration:underline;text-align: center; color: black;}
+    .meter_rec .form small{margin-left:10%;color:black;font-size:1.2em;}
+    .meter_rec .form button {width:40%; margin-left:20%;font-size:1.5em; padding:5px;}
+/* Clear floats after the columns */
+.insurance-row:after { content: ""; display: table; clear: both;}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .csv_sub , .other_rec {
+    width: 100%;}}
+    .LP{width:47%;margin-left:1%;padding:5px;border-radius:20px;text-align:center;height:250px;border:2px solid black;}
+    .LP h2{font-size:2em; text-decoration:underline;text-align: center; color: black;}
+    .LP button {width:40%; font-size:1.5em; padding:5px;}
+    .LP input{padding:10px;margin-left:2%;width:80%;font-size:1.7em;}
+    .LP small{margin-left:0;color:black;font-size:1.2em;}
+
+</style>
+<script language="javascript">
+function submitfunction(){
+  const main = document.getElementById("myFile_m")
+  const check = document.getElementById("myFile_c")
+  const form = document.getElementById("form")
+  const errorElement = document.getElementById("error")
+  const mainvalue = document.getElementById("myFile_m").value
+
+  form.addEventListener('submit',(e) =>{
+  let messages = []
+
+  if (main.value === '' && check.value === '' || main.value == null && check.value == null)
+  {alert("Upload at least one csv file")
+  e.preventDefault()}
+
+  var fileInput = document.getElementById('myFile_m');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.csv)$/i;
+    if(fileInput.value != '' && !allowedExtensions.exec(filePath)){
+      alert("Upload csv files only for main meter")
+      e.preventDefault()
+
+    }
+  var fileInput1 = document.getElementById('myFile_c');
+    var filePath1 = fileInput1.value;
+    var allowedExtensions1 = /(\.csv)$/i;
+    if(fileInput1.value != '' && !allowedExtensions1.exec(filePath1)){
+      alert("Upload csv files only for check meter")
+      e.preventDefault()
+    }
+
+  if (messages.length>0){
+  e.preventDefault()
+  errorElement.innerText = messages
+  }
+
+  })
+  }
+</script>

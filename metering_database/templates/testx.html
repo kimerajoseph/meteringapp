@@ -1,0 +1,51 @@
+<table id="my-table">
+  <thead>
+    <tr>
+      <th>First</th>
+      <th>Last</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Joe</td>
+      <td><input type="text" maxlength="10"></td>
+    </tr>
+    <tr>
+      <td>Muhammad</td>
+      <td><input type="text" maxlength="5"></td>
+    </tr>
+    <tr>
+      <td>Maria</td>
+      <td><input type="text" maxlength="15"></td>
+    </tr>
+  <tr>
+                <td>Substation:</td>
+                <td><input type="text" name="sub" id="sub" placeholder="Eg Lugogo " maxlength="20"></td>
+                <td>Voltage :</td>
+                <td><input type="text" name="voltage" id="voltage" PLACEHOLDER="Eg 132/33/11 kV" maxlength="20"></td>
+            </tr>
+  </tbody>
+</table>
+<script>
+    document.querySelector("#my-table tbody").addEventListener("keypress", function(event) {
+   if (event.target !== event.currentTarget) {
+        var clickedItem = event.target.id;
+        var Len2 = event.target.maxLength;
+        var len = event.target.value.length;
+        if (len >= Len2){alert("Maximum character length reached")}
+    }
+    event.stopPropagation();
+});
+
+</script>
+<style>
+    table, td, th {
+  border: 1px solid #ddd;
+}
+table {
+  border-collapse: collapse;
+}
+td, th {
+  padding: 4px;
+}
+</style>

@@ -1,0 +1,282 @@
+<div class="container">
+    <form action="{% url 'meterrecord' %}" name="newmeter" id="newmeter" method="POST">
+        {% csrf_token %}
+        <table>
+            <thead>
+            <tr>
+                <th colspan="4"><h2>UETCL NEW METERING POINT DETAILS</h2></th>
+            </tr>
+            <tr>
+                <th colspan="4" style="font-size:1.5em;">LOCATION:</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Village:</td>
+                <td><input type="text" name="village_st" id="village_st" maxlength="15"></td>
+                <td>Sub-County:</td>
+                <td><input type="text" name="sub_county_st" id="sub_county_st" maxlength="15"></td>
+            </tr>
+            <tr>
+              <td>District:</td>
+                <td><input type="text" name="district_st" id="district_st" maxlength="15"></td>
+                 <td>Region:</td>
+                <td><input type="text" name="region_st" id="region_st" maxlength="15"></td>
+            </tr>
+            <td>Coordinates (X)</td>
+                <td><input type="text" name="x_cordinates_st" id="x_cordinates_st" maxlength="10"></td>
+                 <td>Coordinates (Y)</td>
+                <td><input type="text" name="y_cordinates_st" id="y_cordinates_st" maxlength="10"></td>
+            </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.2em;">FEEDER DETAILS,OWNER AND DISTRIBUTORS:</th>
+            </tr>
+            <tr>
+                <td>Feeder Name:</td>
+                <td><input type="text" name="feeder_name_st" id="feeder_name_st" maxlength="15"></td>
+                <td>Voltage:</td>
+                <td><input type="number" name="voltage_st" id="voltage_st" maxlength="15"></td>
+            </tr>
+            <tr>
+                <td>Distributor 1:</td>
+                <td><input type="text" name="distributor_1" id="distributor_1" maxlength="10"></td>
+                <td>Distributor 2:</td>
+                <td><input type="text" name="distributor_2" id="distributor_2" maxlength="15"></td>
+            </tr>
+            <tr>
+                 <td>Meter Owner:</td>
+                <td><input type="text" name="meter_owner_st" id="meter_owner_st" maxlength="10"></td>
+                <!--<td>Contractor:</td>
+                <td colspan="1"><input type="text" placeholder="Company that installed the meter" name="contractor_st" id="contractor_st"></td>-->
+
+            </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.3em;">METERING UNIT DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="manu_meter_st" id="manu_meter_st" maxlength="15"></td>
+                <td>Type:</td>
+                <td><input type="text" name="meter_type_st" id="meter_type_st" maxlength="15"></td>
+            </tr>
+            <tr>
+                <td>D.O.M</td>
+                <td><input type="text" placeholder="Manufacturing Date eg Dec 2010" name="DOM_st" id="DOM_st"></td>
+                <td>MU Serial No</td>
+                <td><input type="text" name="mu_meter_no_st" id="mu_meter_no_st" maxlength="15"></td>
+
+            </tr>
+            <tr>
+                <td>No.of Elements:</td>
+               <td colspan="1">
+          <select name="elements_st" id="elements_st" >
+            <option value="none" selected disabled hidden>Select No of Elements</option>
+          <option value="3-Element">3-Element</option>
+          <option value="2-Element">2-Element</option>
+          </select> </td>
+                <td>Wired As:</td>
+               <td colspan="1">
+          <select name="wired_as_st" id="wired_as_st" >
+            <option value="none" selected disabled hidden>Select No of Elements</option>
+          <option value="3-Element">3-Element</option>
+          <option value="2-Element">2-Element</option>
+          </select> </td>
+            </tr>
+
+            <tr>
+                <td>Commissioning Date</td>
+                <td><input type="date" placeholder="enter commissioning date" name="comm_date_st" id="comm_date_st"></td>
+                <td>DLP (months) </td>
+                <td><input type="number" name="DLP_st" id="DLP_st" placeholder="Defects Liability Period" maxlength="5"></td>
+            </tr>
+            <tr>
+                <td>No. of Metering CT cores</td>
+                <td><input type="number" name="meter_cores_st" id="meter_cores_st" maxlength="5"></td>
+                <td>CT Core ratios</td>
+                <td><input type="text" name="core_ratios_st" id="core_ratios_st" maxlength="20"></td>
+            </tr>
+            <tr>
+                <td>CT core Used</td>
+                <td><input type="text" name="core_used_st" id="core_used_st" maxlength="7"></td>
+                <td>Accuracy class</td>
+                <td><input type="text" name="accuracy_st" id="accuracy_st" placeholder="Class of wired CT core" maxlength="7"></td>
+            </tr>
+            <tr>
+                <td>Available spares</td>
+                <td><input type="text" name="avail_spares_st" id="avail_spares_st" maxlength="20"></td>
+                <td>Spares Class</td>
+                <td><input type="text" name="spares_class_st" id="spares_class_st" placeholder="avail spare CT cores" maxlength="10"></td>
+            </tr>
+                   <tr>
+                        <td>VT Ratio</td>
+                <td><input type="text" name="vt_ratio_st" id="vt_ratio_st" maxlength="7"></td>
+                       <td>VT Accuracy</td>
+                <td><input type="text" name="vt_accuracy_st" id="vt_accuracy_st" maxlength="7"></td>
+                   </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.3em;">MAIN ENERGY METER DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="energy_meter_manu" id="energy_meter_manu" maxlength="15"></td>
+                <td>Type:</td>
+                <td><input type="text" name="energy_meter_type" id="energy_meter_type" maxlength="15"></td>
+            </tr>
+             <tr>
+                <td>Meter No</td>
+                <td><input type="text" name="energy_meter_no" id="energy_meter_no" maxlength="15"></td>
+                <td>Y.O.M</td>
+                <td><input type="text" placeholder="Year of Manufacture" name="meter_YOM" id="meter_YOM" maxlength="15"></td>
+            </tr>
+             <tr>
+                <td>Accuracy Class</td>
+                <td><input type="text" name="e_meter_accuracy" id="e_meter_accuracy" maxlength="7"></td>
+                <td>No. Of Elements:</td>
+               <td colspan="1">
+          <select name="e_meter_elements" id="e_meter_elements" >
+            <option value="none" selected disabled hidden>No. Of Elements</option>
+          <option value="3-Element">3-Element</option>
+          <option value="2-Element">2-Element</option>
+        </select>
+        </td>
+            </tr>
+            <tr>
+                   <td>Wired as:</td>
+               <td colspan="1">
+          <select name="e_meter_wired" id="e_meter_wired" >
+            <option value="none" selected disabled hidden>Type of wiring</option>
+          <option value="3-Element">3-Element</option>
+          <option value="2-Element">2-Element</option>
+        </select>
+        </td>
+                 <td>Installation date</td>
+                <td><input type="date" name="e_instal_date" id="e_instal_date"></td>
+            </tr>
+            <tr>
+
+                <td>Decommissioning date</td>
+                <td><input type="date" name="e_decom_date" id="e_decom_date" placeholder="Proposed Decomissioning date"></td>
+                 <td>Access</td>
+                 <td colspan="1">
+          <select name="access" id="access" >
+            <option value="none" selected disabled hidden>Meter Access</option>
+          <option value="remote">Remote</option>
+          <option value="local">Local</option>
+        </select>
+                 </td>
+            </tr>
+             <tr>
+                <td>IP Address</td>
+                <td><input type="text" name="ip_address" id="ip_address" maxlength="20"></td>
+
+                <td>Avail Interfaces</td>
+                <td><input type="text" name="interfaces" id="interfaces" placeholder="Ethernet,optical eye,VGA" maxlength="40"></td>
+            </tr>
+            <tr>
+                <td>Communication Protocols</td>
+                <td><input type="text" name="comm_protocol" id="comm_protocol" placeholder="Protocols eg GSM, TCP/IP" maxlength="15"></td>
+                <td>Protocol Used</td>
+                <td><input type="text" name="comm_protocol_used" id="comm_protocol_used" placeholder="Ethernet,optical eye,VGA" maxlength="10"></td>
+            </tr>
+               <tr>
+               <th colspan="4" style="font-size:1.3em;">CHECK ENERGY METER DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="energy_meter_manu_ch" id="energy_meter_manu_ch" maxlength="15"></td>
+                <td>Type:</td>
+                <td><input type="text" name="energy_meter_type_ch" id="energy_meter_type_ch" maxlength="15"></td>
+            </tr>
+             <tr>
+                <td>Meter No</td>
+                <td><input type="text" name="energy_meter_no_ch" id="energy_meter_no_ch" maxlength="15"></td>
+                <td>Y.O.M</td>
+                <td><input type="text" placeholder="Year of Manufacture" name="meter_YOM_ch" id="meter_YOM_ch" maxlength="15"></td>
+            </tr>
+             <tr>
+                <td>Accuracy Class</td>
+                <td><input type="text" name="e_meter_accuracy_ch" id="e_meter_accuracy_ch" maxlength="7"></td>
+                <td>No. Of Elements:</td>
+               <td colspan="1">
+          <select name="e_meter_elements_ch" id="e_meter_elements_ch" >
+            <option value="none" selected disabled hidden>Type of wiring</option>
+          <option value="3-Element">3-Element</option>
+          <option value="2-Element">2-Element</option>
+        </select>
+        </td>
+            </tr>
+            <tr>
+                   <td>Wired as:</td>
+               <td colspan="1">
+          <select name="e_meter_wired_ch" id="e_meter_wired_ch" >
+            <option value="none" selected disabled hidden>Type of wiring</option>
+          <option value="3-Element">3-Element</option>
+          <option value="2-Element">2-Element</option>
+        </select>
+        </td>
+                  <td>Installation date</td>
+                <td><input type="date" name="e_instal_date_ch" id="e_instal_date_ch" maxlength="15"></td>
+            </tr>
+            <tr>
+
+                <td>Decommissioning date</td>
+                <td><input type="date" name="e_decom_date_ch" id="e_decom_date_ch" placeholder="Proposed Decomissioning date" maxlength="15"></td>
+                     <td>Access</td>
+                  <td colspan="1">
+          <select name="access_ch" id="access_ch" >
+            <option value="none" selected disabled hidden>Meter Access</option>
+          <option value="remote">Remote</option>
+          <option value="local">Local</option>
+        </select>
+            </tr>
+             <tr>
+
+             <td>IP Address</td>
+                <td><input type="text" name="ip_address_ch" id="ip_addres_ch" maxlength="20"></td>
+
+                <td>Avail Interfaces</td>
+                <td><input type="text" name="interfaces_ch" id="interfaces_ch" placeholder="Ethernet,optical eye,VGA" maxlength="40"></td>
+            </tr>
+            <tr>
+                <td>Communication Protocols</td>
+                <td><input type="text" name="comm_protocol_ch" id="comm_protocol_ch" placeholder="Protocols eg GSM, TCP/IP" maxlength="15"></td>
+                <td>Protocol Used</td>
+                <td><input type="text" name="comm_protocol_used_ch" id="comm_protocol_used_ch" placeholder="Protocols eg GSM, TCP/IP" maxlength="10"></td>
+            </tr>
+            </tbody>
+        </table>
+          <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+       document.querySelector("#newmeter tbody").addEventListener("keypress", function(event) {
+   if (event.target !== event.currentTarget) {
+        var clickedItem = event.target.id;
+        var Len2 = event.target.maxLength;
+        var len = event.target.value.length;
+        if (len >= Len2){alert("Maximum character length reached")}
+    }
+    event.stopPropagation();
+});
+</script>
+<style>
+    body{background-color: #F2F7F9;}
+    table, th, td {
+  border: 1px solid black;
+}
+tr{height:20px;font-size:1.2em;}
+table{width:90%; margin:auto;}
+input {font-size:1.2em;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center; background-color: #F2F7F9;
+}
+
+select {width:100%; border:0; background-color: #F2F7F9;}
+button{font-size: 2em; width: 45%; padding: 5px; border: 2px solid green; border-radius: 20px;
+    margin-left: 30%; margin-top: 1em;}
+    button:hover{color:white; background:crimson; border:crimson;}
+    form{border:2px solid black; padding:20px}
+</style>

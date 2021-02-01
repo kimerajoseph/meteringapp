@@ -1,0 +1,263 @@
+<div>
+    <form id="meter_reading" action="{% url 'submission' %}" method="POST">
+        {% csrf_token %}
+<table style="width:80%; margin: auto;" >
+<tr>
+    <th colspan="1" ><img src="media/logo.jpg" alt="" ></th>
+    <th colspan="3">  <h2 style="width:100%; text-align: center;font-size:2.5em;">UGANDA ELECTRICITY TRANSMISSION COMPANY LTD</h2>
+    <h2 style="font-size:2em;">BILLING FORM</h2></th>
+</tr>
+    <tr>
+        <th colspan="1"><h3>METER READING POINT:</h3></th>
+        <th colspan="1"><input type="text" ></th>
+        <th ><h3>Energy Sales For:</h3></th>
+
+        <th><input type="text" name="month_of_sale" id="month_of_sale" value="{{M_O_S}}"></th>
+
+    </tr>
+
+<tr>
+    <th>Reading Date:</th>
+    <th><input type="text" name="reading_date" value="{{D_O_R}}"></th>
+    <th>Reading Time:</th>
+      <th><input type="text" name="reading_time" value="{{read_time}}"></th>
+</tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <th><h4>MAIN METER</h4></th>
+        <th><h4>CHECK METER</h4></th>
+    </tr>
+<tr>
+    <th><h3>No.</h3></th>
+     <th><h3>ITEM</h3></th>
+     <th><h3>READING</h3></th>
+     <th><h3>READING</h3></th>
+</tr>
+    <tr>
+        <td>1</td>
+        <td>UETCL No.</td>
+        <td><input type="text" name="main_meter_no" id="main_meter_no" value="{{meter}}"></td>
+         <td><input type="text" name="check_meter_no" id="check_meter_no" value="{{meter_ch}}"></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>H1:Cum Import (MWh)</td>
+        <td><input type="text" name="cum_imp_m" id="cum_imp_m" value="{{imp_wh}}"></td>
+         <td><input type="text" name="cum_imp_c" id="cum_imp_c" value="{{imp_wh_ch}}"></td>
+    </tr>
+     <tr>
+        <td>3</td>
+        <td>H1:Cum export (MWh)</td>
+        <td><input type="text" name="cum_exp_m" id="cum_exp_m" value="{{exp_wh}}"></td>
+         <td><input type="text" name="cum_exp_c" id="cum_exp_c" value="{{exp_wh_ch}}"></td>
+    </tr>
+     <tr>
+        <td>4</td>
+        <td>Apparent Power</td>
+        <td><input type="text" name="app_pow_m" id="app_pow_m" value="{{app_pow}}"></td>
+         <td><input type="text" name="app_pow_c" id="app_pow_c" value="{{app_pow_ch}}"></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>H1: Rate 1 (MWh)</td>
+        <td><input type="text" name="rate1_m" id="rate1_m" value="{{rate1}}"></td>
+         <td><input type="text" name="rate1_c" id="rate1_c" value="{{rate1_ch}}"></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>H1: Rate 2 (MWh)</td>
+        <td><input type="text" name="rate2_m" id="rate2_m" value="{{rate2}}"></td>
+         <td><input type="text" name="rate2_c" id="rate2_c" value="{{rate2_ch}}"></td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>H1: Rate 3 (MWh)</td>
+        <td><input type="text" name="rate3_m" id="rate3_m" value="{{rate3}}"></td>
+         <td><input type="text" name="rate3_c" id="rate3_c" value="{{rate3_ch}}"></td>
+    </tr>
+     <tr>
+        <td>8</td>
+        <td>H1: Rate 4 (MWh)</td>
+        <td><input type="text" name="rate4_m" id="rate4_m" value="{{rate4}}"></td>
+         <td><input type="text" name="rate4_c" id="rate4_c" value="{{rate4_ch}}"></td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>H1: Rate 5 (MWh)</td>
+        <td><input type="text" name="rate5_m" id="rate5_m" value="{{rate5}}"></td>
+         <td><input type="text" name="rate5_c" id="rate5_c" value="{{rate5_ch}}"></td>
+    </tr>
+     <tr>
+        <td>10</td>
+        <td>H1: Rate 6 (MWh)</td>
+        <td><input type="text" name="rate6_m" id="rate6_m" value="{{rate6}}"></td>
+         <td><input type="text" name="rate6_c" id="rate6_c" value="{{rate6_ch}}"></td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>Max Dem 1</td>
+        <td><input type="text" name="max_dem_m" id="max_dem_m" value="{{max_dem_1}}"></td>
+         <td><input type="text" name="max_dem_c" id="max_dem_c" value="{{max_dem_1_ch}}"></td>
+    </tr>
+     <tr>
+        <td>12</td>
+        <td>Max Dem 1 time</td>
+        <td><input type="text" name="max_dem_t_m" id="max_dem_t_m" value="{{max_dem_1t}}"></td>
+         <td><input type="text" name="max_dem_t_c" id="max_dem_t_c" value="{{max_dem_1t_ch}}"></td>
+    </tr>
+      <tr>
+        <td>13</td>
+        <td>Max Dem 2</td>
+        <td><input type="text" name="max_dem2_m" id="max_dem2_m" value="{{max_dem_2}}"></td>
+         <td><input type="text" name="max_dem2_c" id="max_dem2_c" value="{{max_dem_2_ch}}"></td>
+    </tr>
+     <tr>
+        <td>14</td>
+        <td>Max Dem 2 time</td>
+        <td><input type="text" name="max_dem2_t_m" id="max_dem2_t_m" value="{{max_dem_2t}}"></td>
+         <td><input type="text" name="max_dem2_t_c" id="max_dem2_t_c" value="{{max_dem_2t_ch}}"></td>
+    </tr>
+      <tr>
+        <td>15</td>
+        <td>Max Dem 3</td>
+        <td><input type="text" name="max_dem3_m" id="max_dem3_m" value="{{max_dem_3}}"></td>
+         <td><input type="text" name="max_dem3_c" id="max_dem3_c" value="{{max_dem_3_ch}}"></td>
+    </tr>
+     <tr>
+        <td>16</td>
+        <td>Max Dem 3 time</td>
+        <td><input type="text" name="max_dem3_t_m" id="max_dem3_t_m" value="{{max_dem_3t}}"></td>
+         <td><input type="text" name="max_dem3_t_c" id="max_dem3_t_c" value="{{max_dem_3t_ch}}"></td>
+    </tr>
+     <tr>
+        <td>17</td>
+        <td>Import MVArh</td>
+        <td><input type="text" name="imp_mvarh_m" id="imp_mvarh_m" value="{{total_imp_MVArh}}"></td>
+         <td><input type="text" name="imp_mvarh_c" id="imp_mvarh_c" value="{{total_imp_MVArh_ch}}"></td>
+    </tr>
+      <tr>
+        <td>18</td>
+        <td>Export MVArh</td>
+        <td><input type="text" name="exp_mvarh_m" id="exp_mvarh_m" value="{{total_exp_MVArh}}"></td>
+         <td><input type="text" name="exp_mvarh_c" id="exp_mvarh_c" value="{{total_exp_MVArh_ch}}"></td>
+    </tr>
+    <tr>
+        <td>19</td>
+        <td>H1: Total MVArh</td>
+        <td><input type="text" name="total_mvarh_m" id="total_mvarh_m" value="{{total_MVArh}}"></td>
+         <td><input type="text" name="total_mvarh_c" id="total_mvarh_c" value="{{total_MVArh_ch}}"></td>
+    </tr>
+     <tr>
+        <td>20</td>
+        <td>H1: No. of resets</td>
+        <td><input type="text" name="resets_m" id="resets_m" value="{{resets}}"></td>
+         <td><input type="text" name="resets_c" id="resets_c" value="{{resets_ch}}"></td>
+    </tr>
+      <tr>
+        <td>21</td>
+        <td>H1: Last Reset</td>
+        <td><input type="text" name="last_reset_m" id="last_reset_m" value="{{reset_time}}"></td>
+         <td><input type="text" name="last_reset_c" id="last_reset_c" value="{{reset_time_ch}}"></td>
+    </tr>
+        <tr>
+        <td>22</td>
+        <td>Power Down Count</td>
+        <td><input type="text" name="pow_down_count_m" id="pow_down_count_m"></td>
+         <td><input type="text" name="pow_down_count_c" id="pow_down_count_c"></td>
+    </tr>
+      <tr>
+        <td>23</td>
+        <td>Last Power Down Date & Time</td>
+        <td><input type="text" name="pow_down_dt_m" id="pow_down_dt_m" value="No Data"></td>
+         <td><input type="text" name="pow_down_dt_c" id="pow_down_dt_c"></td>
+    </tr>
+      <tr>
+        <td>24</td>
+        <td>Programming Count</td>
+        <td><input type="text" name="prog_count_m" id="prog_count_m"></td>
+         <td><input type="text" name="prog_count_c" id="prog_count_c"></td>
+    </tr>
+     <tr>
+        <td>25</td>
+        <td>Last Programming Date & Time</td>
+        <td><input type="text" name="prog_count_dt_m" id="prog_count_dt_m" value="No Data"></td>
+         <td><input type="text" name="prog_count_dt_c" id="prog_count_dt_c"></td>
+    </tr>
+     <tr>
+        <td>26</td>
+        <td>VT Ratio</td>
+        <td><input type="text" name="vt_ratio_m" id="vt_ratio_m" value="{{data.1}}"></td>
+         <td><input type="text" name="vt_ratio_c" id="vt_ratio_c"></td>
+    </tr>
+     <tr>
+        <td>27</td>
+        <td>CT Ratio</td>
+        <td><input type="text" name="ct_ratio_m" id="ct_ratio_m" value="{{data.0}}"></td>
+         <td><input type="text" name="ct_ratio_c" id="ct_ratio_c"></td>
+    </tr>
+     <tr style="text-align: center;">
+        <th>Witness:</th>
+        <th colspan="2">Name</th>
+         <th colspan="1">Signature</th>
+    </tr>
+    <tr>
+        <th>UETCL:</th>
+        <th colspan="2"><input type="text"></th>
+        <th><input type="text"></th>
+    </tr>
+    <tr>
+        <th><select name="client_type" id="client_type">
+            <option value="none" selected disabled hidden>Select</option>
+            <option value="dist">Distributor</option>
+            <option value="ipp">IPP</option>
+        </select>
+
+        </th>
+        <th>
+            <select name="client" id="client">
+                <option value="none" selected disabled hidden>select your Co.</option>
+                <option value="umeme">Umeme</option>
+                <option value="uedcl">UEDCL</option>
+                <option value="packmecs">PACKMECS</option>
+            </select>
+        </th>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+    </tr>
+</table>
+    <button type="submit">Submit</button>
+    </form>
+
+    </div>
+<style>
+body{background-color: #F2F7F9;}
+    table, th, td {
+  border: 1px solid black;text-align:center;
+}
+td{font-size:1.5em;}
+tr{height:20px;}
+
+
+input {font-size:1.2em;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center; background-color: #F2F7F9;
+}
+img{width:200px; height:100px}
+select {width:100%; border:0; background-color: #F2F7F9;}
+/*table h2, h3{margin: auto;} */
+button{font-size: 2em; width: 45%; padding: 5px; border: 2px solid green;
+    margin-left: 35%; margin-top: 2em;}
+    button:hover{color:white; background:crimson; border:crimson;}
+</style>
+<!--
+<label for="">UETCL No.</label>
+<input type="text">
+<br>
+<label for="">H1 Cum import</label>
+<input type="text">
+
+<style>
+
+</style>-->
