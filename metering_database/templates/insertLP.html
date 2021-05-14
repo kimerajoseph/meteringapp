@@ -1,11 +1,24 @@
 <body>
 <div class="LP">
-  <form action="{% url 'monthly_LP' %}" method="post" id="LPform" name="LPform" enctype="multipart/form-data">
+          <h2>Insert Meter Load Profiles</h2>
+  <form action="{% url 'monthly_LP' %}" method="post" id="LPform_elster" name="LPform_elster" enctype="multipart/form-data">
      {% csrf_token %}
-      <h2>Insert Meter Load Profile</h2>
-<input type="file" id="LP" name="LP" accept=".csv" >
+      <h3>Insert Elster Load Profiles</h3>
+<input type="file" id="LP_elster" name="LP_elster" accept=".csv" >
   <br>
   <small>Upload LP CSV file</small>
+    <br>
+    <br>
+       <button type="submit">Submit LP files</button>
+
+  </form>
+      <form action="{% url 'load_profile_cewe_prometer' %}" method="post" id="LPform_cewe_prometer"
+            name="LPform_cewe_prometer" enctype="multipart/form-data">
+     {% csrf_token %}
+           <h3>Insert Cewew Prometer Load Profiles</h3>
+<input type="file" id="LP_cewe_prometer" name="LP_cewe_prometer" accept=".pdf" >
+  <br>
+  <small>Upload LP PDF file</small>
     <br>
     <br>
        <button type="submit">Submit LP files</button>
@@ -21,31 +34,44 @@
 
     button:hover{color:white; background:crimson; border:crimson;}
      .LP{width:80%;margin-left:10%;padding:5px;border-radius:20px;text-align:center;height:600px;border:2px solid black;}
-    .LP h2{font-size:2em; text-decoration:underline;text-align: center; color: black;}
+    .LP h2{font-size:3em; text-decoration:underline;text-align: center; color: black;}
+    .LP h3{font-size:1.8em; text-decoration:underline;text-align: left; color: black;}
     .LP button {width:40%; font-size:1.5em; padding:10px;align:center;border: 2px solid green;
     align:center;}
-    .LP input{padding:10px;align:center;width:80%;font-size:1.5em;}
-    .LP small{align:center;;color:black;font-size:1.2em;}
+    .LP input{padding:10px;align:left;width:80%;font-size:1.5em;}
+    .LP small{align:left;;color:black;font-size:1.2em;}
 </style>
 
 <script>
-    const LP = document.getElementById("LP")
-    const errorElement = document.getElementById("error")
-    const form = document.getElementById("LPform")
-
-    form.addEventListener('submit',(e) =>{
-  let messages = []
-  if (LP.value === '')
-  {alert("You have not uploaded a file")
+    // Event Listener for Elster LP
+  const form_elster = document.getElementById("LPform_elster")
+  const lp_elster = document.getElementById("LP_elster")
+  form_elster.addEventListener('submit',(e) =>{
+  if (lp_elster.value === '' )
+  {alert("Upload at least one csv file")
   e.preventDefault()}
 
-    var fileInput1 = document.getElementById('LP');
-    var filePath1 = fileInput1.value;
-    var allowedExtensions1 = /(\.csv)$/i;
-    if(fileInput1.value != '' && !allowedExtensions1.exec(filePath1)){
-      alert("Please upload csv files only")
+    var filePath = lp_elster.value;
+    var allowedExtensions = /(\.csv)$/i;
+    if(lp_elster.value != '' && !allowedExtensions.exec(filePath)){
+      alert("Upload csv files only")
       e.preventDefault()
     }
+  })
 
+      // Event Listener for cewe_prometer LP
+  const form_cewe = document.getElementById("LPform_cewe_prometer")
+  const lp_cewe = document.getElementById("LP_cewe_prometer")
+  form_cewe.addEventListener('submit',(e) =>{
+  if (lp_cewe.value === '' )
+  {alert("Upload at least one PDF file")
+  e.preventDefault()}
+
+    var filePath = lp_cewe.value;
+    var allowedExtensions = /(\.pdf)$/i;
+    if(lp_cewe.value != '' && !allowedExtensions.exec(filePath)){
+      alert("Upload PDF files only")
+      e.preventDefault()
+    }
   })
 </script>

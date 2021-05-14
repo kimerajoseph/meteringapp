@@ -1,5 +1,5 @@
 <div class="container">
-    <form action="{% url 'sub_meterrecord' %}" name="sub_newmeter" id="sub_newmeter" method="POST">
+    <form action="{% url 'sub_meterrecord' %}" name="sub_newmeter" id="sub_newmeter" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             <thead>
@@ -31,23 +31,47 @@
             </tr>
             <tr>
                <th colspan="4" style="font-size:1.2em;">FEEDER DETAILS,OWNER AND DISTRIBUTORS:</th>
+        <tr>
+                  <td>Component:</td>
+               <td colspan="1">
+          <select name="comp" id="comp" >
+            <option value="none" selected disabled hidden>Select Component type</option>
+                    <option value="TX">Transformer</option>
+          <option value="T/Line">Power Line</option>
+              <option value="others">Others</option>
+        </select>
+        </td>
+                        <td>Capacity (MVA):</td>
+     <td><input type="text" name="capacity" id="capacity" maxlength="7"></td>
             </tr>
+
             <tr>
-                <td>Feeder Name:</td>
-                <td><input type="text" name="sub_feeder" id="sub_feeder" maxlength="15"></td>
-                <td>Feeder Voltage (kV):</td>
-                <td><input type="number" name="sub_feeder_voltage" id="sub_feeder_voltage" maxlength="5"></td>
+                 <td>Network Type:</td>
+               <td colspan="1">
+          <select name="net_type" id="net_type" >
+            <option value="none" selected disabled hidden>Select Network type</option>
+                    <option value="ring">Ring</option>
+          <option value="radial">Radial</option>
+        </select>
+        </td>
+
+                <td>Component Name:</td>
+                <td><input type="text" name="sub_feeder" id="sub_feeder" maxlength="35"></td>
 
             </tr>
             <tr>
+                 <td>Component Voltage (kV):</td>
+                <td><input type="number" name="sub_feeder_voltage" id="sub_feeder_voltage" maxlength="5"></td>
+
                 <td>Meter Owner:</td>
-                <td><input type="text" name="sub_meter_owner" id="sub_meter_owner" maxlength="7"></td>
-                <td>Distributor:</td>
-                <td><input type="text" name="distributor" id="distributor" maxlength="15"></td>
+                <td><input type="text" name="sub_meter_owner" id="sub_meter_owner" maxlength="15"></td>
+
             </tr>
             <tr>
-                <td>Contractor:</td>
-                <td colspan="3"><input type="text" placeholder="Company that installed the meter" name="subs_contractor" id="subs_contractor" maxlength="30"></td>
+                 <td>Distributor:</td>
+                <td><input type="text" name="distributor" id="distributor" maxlength="15"></td>
+                <td>Comments:</td>
+                <td colspan="3"><input type="text"  name="subs_contractor" id="subs_contractor" maxlength="30"></td>
 
             </tr>
             <tr>
@@ -112,6 +136,7 @@
                <td colspan="1">
           <select name="sub_meter_elements" id="sub_meter_elements" >
             <option value="none" selected disabled hidden>No. Of Elements</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -123,6 +148,7 @@
                <td colspan="1">
           <select name="sub_meter_wire" id="sub_meter_wire" >
             <option value="none" selected disabled hidden>Type of wiring</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -138,6 +164,7 @@
                    <td colspan="1">
           <select name="sub_meter_access" id="sub_meter_access" >
             <option value="none" selected disabled hidden>Meter Access</option>
+              <option value="N/A">N/A</option>
           <option value="remote">Remote</option>
           <option value="local">Local</option>
         </select>
@@ -177,6 +204,7 @@
                <td colspan="1">
           <select name="sub_meter_elements_ch" id="sub_meter_elements_ch" >
             <option value="none" selected disabled hidden>No. Of Elements</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -188,6 +216,7 @@
                <td colspan="1">
           <select name="sub_meter_wire_ch" id="sub_meter_wire_ch" >
             <option value="none" selected disabled hidden>Type of wiring</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -204,6 +233,7 @@
                    <td colspan="1">
           <select name="sub_meter_access_ch" id="sub_meter_access_ch" >
             <option value="none" selected disabled hidden>Meter Access</option>
+              <option value="N/A">N/A</option>
           <option value="remote">Remote</option>
           <option value="local">Local</option>
         </select>
@@ -222,9 +252,17 @@
                 <td><input type="text" placeholder="Protocols eg GSM, TCP/IP" name="sub_meter_protocol_used_ch" id="sub_meter_protocol_used_ch" maxlength="10"></td>
             </tr>
             <tr>
-
+            <tr>
+                   <td style="font-weight:bold" colspan="2">MAIN METER CONFIGURATION FILE:</td>
+        <td colspan="2"><input type="file" name="config_file" id="config_file"></td>
+            </tr>
+            <tr>
+                   <td style="font-weight:bold" colspan="2">CHECK METER CONFIGURATION FILE:</td>
+        <td colspan="2"><input type="file" name="config_file_ch" id="config_file_ch"></td>
+            </tr>
             </tbody>
         </table>
+
           <button type="submit">Submit</button>
     </form>
 </div>
@@ -257,4 +295,5 @@ button{font-size: 2em; width: 45%; padding: 5px; border: 2px solid green; border
     }
     event.stopPropagation();
 });
+
 </script>

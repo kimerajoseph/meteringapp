@@ -1,10 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div class="energy_loss">
+<div class="substation">
+    <h1>Substation Energy Losses Analysis </h1>
+    <form action="{% url 'ipp_analysis_month' %}" method="POST" name="energy_loss_sub" id="energy_loss_sub" class="form">
+          {% csrf_token %}
+        <label for="">Substation</label>
+
+    <select name="sub_list" id="sub_list">
+           <option value="" disabled selected>Select Substation</option>
+        {% for x in uetcl_substations %}
+    <option value="{{x}}">{{x}}</option>
+        {% endfor %}
+</select>
+        <br>
+         <label for="">Month:</label>
+          <select name="loss_month_sub" id="loss_month_sub">
+              <option value=""disabled selected>Select Month</option>
+              {% for m in month_list%}
+              <option value="{{m}}">{{m}}</option>
+              {% endfor%}
+          </select>
+        <br>
+        <label for="">Year:</label>
+          <select name="loss_year_sub" id="loss_year_sub">
+              <option value=""disabled selected>Select Year:</option>
+              {% for m in year_list%}
+              <option value="{{m}}">{{m}}</option>
+              {% endfor%}
+          </select>
+          <br>
+          <br>
+        <button type="submit" >Submit</button>
+        </form>
+    <button type="submit" id="sub_form" onclick="kimera()">Enter Details</button>
+</div>
+<div class="ipp">
+    <h1>IPP Energy Losses Analysis</h1>
+     <button type="submit" id="sub_form1" onclick="kimera1()">Enter Details</button>
+      <form action="" method="POST" name="energy_loss_ipp" id="energy_loss_ipp" class="form">
+          {% csrf_token %}
+          <label for="">Select IPP</label>
+    <select name="ipp_list" id="ipp_list">
+        <option value="" disabled selected>Select IPP</option>
+        {% for y in uetcl_ipp_list %}
+    <option value="{{y}}">{{y}}</option>
+        {% endfor %}
+</select>
+          <br>
+          <label for="">Month:</label>
+          <select name="loss_month" id="loss_month">
+              <option value=""disabled selected>Select Month</option>
+              {% for m in month_list%}
+              <option value="{{m}}">{{m}}</option>
+              {% endfor%}
+          </select>
+          <br>
+          <label for="">Year:</label>
+          <select name="loss_year_ipp" id="loss_year_ipp">
+              <option value=""disabled selected>Select Year:</option>
+              {% for m in year_list%}
+              <option value="{{m}}">{{m}}</option>
+              {% endfor%}
+          </select>
+          <br>
+          <br>
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+</div>
+    </div>
+<div class="multiple">
+<div class="sub_multiple">
+     <h1>Substation Energy Losses Analysis (Multiple Months) </h1>
+    <form action="" method="POST" name="multi_loss_sub" id="multi_loss_sub" class="form">
+          {% csrf_token %}
+        <label for="">Substation</label>
+    <select name="sub_list_m" id="sub_list_m">
+           <option value="" disabled selected>Select Substation</option>
+        {% for x in uetcl_substations %}
+    <option value="{{x}}">{{x}}</option>
+        {% endfor %}
+</select>
+        <br>
+        <br>
+        <label for="">Start Date:</label>
+          <select name="month_m" id="month_m">
+           <option value="" disabled selected>Select Month</option>
+        {% for m in month_list %}
+    <option value="{{m}}">{{m}}</option>
+        {% endfor %}
+</select>
+          <select name="year_m" id="year_m">
+           <option value="" disabled selected>Select Year</option>
+        {% for y in year_list %}
+    <option value="{{y}}">{{y}}</option>
+        {% endfor %}
+</select>
+        <br>
+         <label for="">End Date:</label>
+          <select name="month_m_end" id="month_m_end">
+           <option value="" disabled selected>Select Month</option>
+        {% for m in month_list %}
+    <option value="{{m}}">{{m}}</option>
+        {% endfor %}
+</select>
+          <select name="year_m_end" id="year_m_end">
+           <option value="" disabled selected>Select Year</option>
+        {% for y in year_list %}
+    <option value="{{y}}">{{y}}</option>
+        {% endfor %}
+</select>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <button type="submit" id="sub_form2" onclick="kimera2()">Enter Details</button>
+</div>
+
+
+    <div class="ipp_multiple">
+<h1>IPP Energy Losses Analysis (Multiple Months) </h1>
+         <button type="submit" id="sub_form3" onclick="kimera3()">Enter Details</button>
+    <form action="" method="POST" name="multi_loss_ipp" id="multi_loss_ipp" class="form">
+          {% csrf_token %}
+  <label for="">Select IPP</label>
+    <select name="ipp_list_m" id="ipp_list_m">
+        <option value="" disabled selected>Select IPP</option>
+        {% for y in uetcl_ipp_list %}
+    <option value="{{y}}">{{y}}</option>
+        {% endfor %}
+</select>
+        <br>
+        <br>
+        <label for="">Start Date:</label>
+          <select name="month_m_ipp" id="month_m_ipp">
+           <option value="" disabled selected>Select Month</option>
+        {% for m in month_list %}
+    <option value="{{m}}">{{m}}</option>
+        {% endfor %}
+</select>
+          <select name="year_m_ipp" id="year_m_ipp">
+           <option value="" disabled selected>Select Year</option>
+        {% for y in year_list %}
+    <option value="{{y}}">{{y}}</option>
+        {% endfor %}
+</select>
+        <br>
+         <label for="">End Date:</label>
+          <select name="monthipp_m_end" id="monthipp_m_end">
+           <option value="" disabled selected>Select Month</option>
+        {% for m in month_list %}
+    <option value="{{m}}">{{m}}</option>
+        {% endfor %}
+</select>
+          <select name="yearipp_m_end" id="yearipp_m_end">
+           <option value="" disabled selected>Select Year</option>
+        {% for y in year_list %}
+    <option value="{{y}}">{{y}}</option>
+        {% endfor %}
+</select>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    </div>
+</div>
+
 </body>
 </html>
+<style>
+.energy_loss,.multiple{width:90%;margin:auto;padding:50px;}
+    .ipp, .ipp_multiple {float:right;width:49%;background:#DCF2E1;text-align:center;height:300px;border:5px solid black;}
+    .substation,.sub_multiple{float:left;width:49%;background:#DCF2E1;text-align:center;height:300px;border:5px solid black;}
+    button {width:40%; margin-left:15%;font-size:1.5em; padding:5px;border:2px solid crimson;}
+    select{width:40%;font-size:1.5em;}
+    label{font-size:2em;}
+    #energy_loss_sub, #energy_loss_ipp,#multi_loss_sub,#multi_loss_ipp {display:none;}
+     button:hover{color:white; background:crimson; border:crimson;}
+</style>
+
+<script>
+function kimera(){
+document.getElementById('energy_loss_sub').style.display = "block";
+document.getElementById('sub_form').style.display = "none";
+}
+function kimera1(){
+document.getElementById('energy_loss_ipp').style.display = "block";
+document.getElementById('sub_form1').style.display = "none";
+}
+function kimera2(){
+document.getElementById('multi_loss_sub').style.display = "block";
+document.getElementById('sub_form2').style.display = "none";
+}
+function kimera3(){
+document.getElementById('multi_loss_ipp').style.display = "block";
+document.getElementById('sub_form3').style.display = "none";
+}
+</script>

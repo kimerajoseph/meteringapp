@@ -9,7 +9,7 @@ import mpld3
 
 conn = pymysql.connect(host='localhost', port=3306, user='root', password='', database='meteringdatabase')
 c = conn.cursor()
-sql = "SELECT end_time, PW FROM uetcl0102 WHERE month = 'September' AND date = '22/09/2020'"
+sql = "SELECT end_time, PW FROM uetcl0102 WHERE date = '22/09/2020'"
 time = []
 power = []
 c.execute(sql)
@@ -65,7 +65,17 @@ app.layout = html.Div(children=[
         Powered by UETCL-EMIS
     ''',style={'textAlign': 'center'}),
 
+    dcc.Dropdown(id='select_day',
+        options=[
+            {"label":"1",'value':1},
+            {"label":"2",'value':2},
+            {"label":"3",'value':3},
+        ],
+                 multi=False,
+                 value=1,
+                 style={'width':'40%'}
 
+    ),
     dcc.Graph(
         id='graph',
         figure=fig

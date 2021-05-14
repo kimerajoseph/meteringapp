@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td>Feeder Name:</td>
-                <td><input type="text" name="feeder_name_st" id="feeder_name_st" maxlength="15"></td>
+                <td><input type="text" name="feeder_name_st" id="feeder_name_st" maxlength="35"></td>
                 <td>Voltage:</td>
                 <td><input type="number" name="voltage_st" id="voltage_st" maxlength="15"></td>
             </tr>
@@ -56,13 +56,13 @@
             </tr>
             <tr>
                 <td>Manufacturer</td>
-                <td><input type="text" name="manu_meter_st" id="manu_meter_st" maxlength="15"></td>
+                <td><input type="text" name="manu_meter_st" id="manu_meter_st" maxlength="25"></td>
                 <td>Type:</td>
-                <td><input type="text" name="meter_type_st" id="meter_type_st" maxlength="15"></td>
+                <td><input type="text" name="meter_type_st" id="meter_type_st" maxlength="20"></td>
             </tr>
             <tr>
                 <td>D.O.M</td>
-                <td><input type="text" placeholder="Manufacturing Date eg Dec 2010" name="DOM_st" id="DOM_st"></td>
+                <td><input type="text" placeholder="Manufacturing Date eg Dec 2010" name="DOM_st" id="DOM_st" maxlength="15"></td>
                 <td>MU Serial No</td>
                 <td><input type="text" name="mu_meter_no_st" id="mu_meter_no_st" maxlength="15"></td>
 
@@ -72,6 +72,7 @@
                <td colspan="1">
           <select name="elements_st" id="elements_st" >
             <option value="none" selected disabled hidden>Select No of Elements</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
           </select> </td>
@@ -79,6 +80,7 @@
                <td colspan="1">
           <select name="wired_as_st" id="wired_as_st" >
             <option value="none" selected disabled hidden>Select No of Elements</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
           </select> </td>
@@ -110,7 +112,7 @@
             </tr>
                    <tr>
                         <td>VT Ratio</td>
-                <td><input type="text" name="vt_ratio_st" id="vt_ratio_st" maxlength="7"></td>
+                <td><input type="text" name="vt_ratio_st" id="vt_ratio_st" maxlength="15"></td>
                        <td>VT Accuracy</td>
                 <td><input type="text" name="vt_accuracy_st" id="vt_accuracy_st" maxlength="7"></td>
                    </tr>
@@ -136,6 +138,7 @@
                <td colspan="1">
           <select name="e_meter_elements" id="e_meter_elements" >
             <option value="none" selected disabled hidden>No. Of Elements</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -146,6 +149,7 @@
                <td colspan="1">
           <select name="e_meter_wired" id="e_meter_wired" >
             <option value="none" selected disabled hidden>Type of wiring</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -161,6 +165,7 @@
                  <td colspan="1">
           <select name="access" id="access" >
             <option value="none" selected disabled hidden>Meter Access</option>
+              <option value="N/A">N/A</option>
           <option value="remote">Remote</option>
           <option value="local">Local</option>
         </select>
@@ -201,6 +206,7 @@
                <td colspan="1">
           <select name="e_meter_elements_ch" id="e_meter_elements_ch" >
             <option value="none" selected disabled hidden>Type of wiring</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -211,6 +217,7 @@
                <td colspan="1">
           <select name="e_meter_wired_ch" id="e_meter_wired_ch" >
             <option value="none" selected disabled hidden>Type of wiring</option>
+              <option value="N/A">N/A</option>
           <option value="3-Element">3-Element</option>
           <option value="2-Element">2-Element</option>
         </select>
@@ -226,6 +233,7 @@
                   <td colspan="1">
           <select name="access_ch" id="access_ch" >
             <option value="none" selected disabled hidden>Meter Access</option>
+              <option value="N/A">N/A</option>
           <option value="remote">Remote</option>
           <option value="local">Local</option>
         </select>

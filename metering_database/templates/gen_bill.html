@@ -5,16 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'bill_gen' %}">
-<div class="gen_bill">
-   <!-- <label for="">Distributor</label>
-<select name="dist" id="dist" >
-    <option value="start" selected>Select Distributor</option>
-        {% for distributor in distributors %}
-    &lt;!&ndash;<option value="none" selected>Enter Distributor</option>&ndash;&gt;
-            <option value= "{{distributor}}" SELECTED>{{distributor}}</option>
-         {% endfor %}
-        </select>-->
+<form action="{% url 'bill_gen' %}" method="post">
+ {% csrf_token %}
+
 <label for="">Meter No.</label>
     <select name="meter_no" id="meter_no" >
         <option value="start" selected>Select Meter No</option>
@@ -22,26 +15,25 @@
             <option value= "{{x}}" SELECTED>{{x}}</option>
          {% endfor %}
         </select>
-<label for="">Month and Year</label>
-    <input type="text" value="{{bill_date}}">
-    <!--<select name="month" id="month" >
+    <label for="">Month</label>
+    <select name="month" id="month" >
         <option value="start" selected>Select Month</option>
-        {% for month in months %}
-            <option value= "{{month}}" SELECTED>{{month}}</option>
+        {% for y in month_list %}
+            <option value= "{{y}}" SELECTED>{{y}}</option>
          {% endfor %}
-        </select>-->
-<!--<label for="">Year</label>
-    <select name="year" id="year" >
+        </select>
+    <label for="">Year</label>
+     <select name="year" id="year" >
         <option value="start" selected>Select Year</option>
-        {% for year in years %}
-            <option value= "{{year}}" SELECTED>{{year}}</option>
+        {% for y in year_list %}
+            <option value= "{{y}}" SELECTED>{{y}}</option>
          {% endfor %}
-        </select>-->
+        </select>
+<!--<label for="">Month and Year</label>-->
+<!--    <input type="text" id="bill_date" name="bill_date" value="{{bill_date}}" >-->
+
 <button type="submit" value="bill_gen">Generate Bill</button>
 
-
-
-</div>
 </form>
 </body>
 </html>

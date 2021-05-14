@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<form method="post" action="{% url 'comfirm_change_pw' %}">
+      {% csrf_token %}
+
+    <div class="django-form">
+          {{ formx.as_table }}
+        <br>
+        <br>
+          <button type="submit">Save Changes</button>
+    </div>
+
+
+</form>
 </body>
 </html>
+<style>
+    .django-form{margin:auto;padding:50px;width:50%;}
+    .django-form button{margin-left:30%;font-size:1.2em;padding:2px;border:2px solid green;width:20%;}
+</style>

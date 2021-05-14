@@ -1,10 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form action="" name="ipp_newmeter" id="ipp_newmeter" method="POST">
+        {% csrf_token %}
+        <table>
+            <thead>
+            <tr>
+                <th colspan="4"><h2>UETCL INDEPENDENT POWER PRODUCER METERING POINT</h2></th>
+            </tr>
+            <tr>
+                <th colspan="4" style="font-size:1.5em;">LOCATION:</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Name of IPP:</td>
+                <td><input type="text" name="ipp_name" id="ipp_name" maxlength="20" value="{{clean_data.0}}"></td>
+                <td>Installed Capacity (MW) :</td>
+                <td><input type="text" name="install_cap" id="install_cap" maxlength="15" value="{{clean_data.1}}"></td>
+            </tr>
+              <tr>
+
+                <td>Generation Type:</td>
+                <td><input type="text" name="gen_type" id="gen_type"  maxlength="15" value="{{clean_data.2}}"></td>
+
+                <td>District:</td>
+                <td><input type="text" name="ipp_dist" id="ipp_dist" maxlength="15" value="{{clean_data.3}}"></td>
+            </tr>
+            <tr>
+                 <td>Region:</td>
+                <td><input type="text" name="ipp_region" id="ipp_region" maxlength="15" value="{{clean_data.4}}"></td>
+                <td>Coordinates (X)</td>
+                <td><input type="text" name="ipp_cord_x" id="ipp_cord_x" maxlength="10" value="{{clean_data.5}}"></td>
+            </tr>
+
+                 <td>Coordinates (Y)</td>
+                <td><input type="text" name="ipp_cord_y" id="ipp_cord_y" maxlength="10" value="{{clean_data.6}}"></td>
+             <!--<td>Comments:</td>
+                <td><input type="text" name="comment" id="comment"  maxlength="35"></td>-->
+            </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.5em;">FEEDER DETAILS AND DISTRIBUTOR:</th>
+            </tr>
+            <tr>
+                <td>Feeder Name:</td>
+                <td><input type="text" name="ipp_feeder" id="ipp_feeder" maxlength="15" value="{{clean_data.7}}"></td>
+                <td>Feeder Voltage (kV):</td>
+                <td><input type="number" name="ipp_feeder_voltage" id="ipp_feeder_voltage" maxlength="5" value="{{clean_data.8}}"></td>
+
+            </tr>
+            <tr>
+                <td>Connecting Substation</td>
+                <td><input type="text" name="ipp_conn" id="ipp_conn" maxlength="20" value="{{clean_data.9}}"></td>
+                <td>Distributor:</td>
+                <td><input type="text" name="distributor" id="distributor" maxlength="15" value="{{clean_data.10}}"></td>
+            </tr>
+            <tr>
+                <td>Comments:</td>
+                <td colspan="3"><input type="text"  name="comments" id="comments" maxlength="60" value="{{clean_data.11}}"></td>
+
+            </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.5em;">CT AND VT DETAILS:</th>
+            </tr>
+            <tr>
+                <td>CT Manufacturer</td>
+                <td><input type="text" name="ipp_ct_manu" id="ipp_ct_manu" maxlength="25" value="{{clean_data.12}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="ipp_ct_type" id="ipp_ct_type" maxlength="15" value="{{clean_data.13}}"></td>
+            </tr>
+
+            <tr>
+                <td>No. of Metering CT cores</td>
+                <td><input type="number" name="ipp_ct_cores" id="ipp_ct_cores" maxlength="3" value="{{clean_data.14}}"></td>
+                <td>CT Core ratios</td>
+                <td><input type="text" name="ipp_ct_core_ratios" maxlength="20" value="{{clean_data.15}}"></td>
+            </tr>
+            <tr>
+                <td>CT core Used</td>
+                <td><input type="text" name="ipp_core_used" id="ipp_core_used" maxlength="10" value="{{clean_data.16}}"></td>
+                <td>Accuracy class</td>
+                <td><input type="text" name="ipp_accuracy_class" id="ipp_accuracy_class" maxlength="5" value="{{clean_data.17}}"></td>
+            </tr>
+            <tr>
+                <td>No. of Available spares</td>
+                <td><input type="text" name="ipp_avail_spares" id="ipp_avail_spares" maxlength="3" value="{{clean_data.18}}"></td>
+                <td>Spares Class</td>
+                <td><input type="text" name="ipp_spares_class" id="ipp_spares_class" maxlength="10" value="{{clean_data.19}}"></td>
+            </tr>
+             <tr>
+                <td>VT Manufacturer</td>
+                <td><input type="text" name="ipp_vt_manu" id="ipp_vt_manu" maxlength="15" value="{{clean_data.20}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="ipp_VT_type" id="ipp_VT_type" maxlength="15" value="{{clean_data.21}}"></td>
+            </tr>
+                   <tr>
+                        <td>VT Ratio</td>
+                <td><input type="text" name="ipp_vt_ratio" id="ipp_vt_ratio" maxlength="10" value="{{clean_data.22}}"></td>
+                       <td>VT Accuracy</td>
+                <td><input type="text" name="ipp_vt_accuracy" id="ipp_vt_accuracy" maxlength="5" value="{{clean_data.23}}"></td>
+                   </tr>
+
+               <th colspan="4" style="font-size:1.5em;">MAIN ENERGY METER DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="ipp_meter_manu" id="ipp_meter_manu" maxlength="15" value="{{clean_data.24}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="ipp_meter_type" id="ipp_meter_type" maxlength="15" value="{{clean_data.25}}"></td>
+            </tr>
+             <tr>
+                <td>Meter No</td>
+                <td><input type="text" name="ipp_meter_no" id="ipp_meter_no" maxlength="15" value="{{clean_data.26}}"></td>
+                <td>Y.O.M</td>
+                <td><input type="text" name="ipp_YOM" id="ipp_YOM" maxlength="15" value="{{clean_data.27}}"></td>
+            </tr>
+             <tr>
+                <td>Accuracy Class</td>
+                <td><input type="text" name="ipp_meter_acc_class" id="ipp_meter_acc_class" maxlength="5" value="{{clean_data.28}}"></td>
+                  <td>No. Of Elements:</td>
+                 <td><input type="text" name="ipp_meter_elements" id="ipp_meter_elements" value="{{clean_data.29}}"></td>
+
+            </tr>
+            <tr>
+                  <td>Wired as:</td>
+                <td><input type="text" name="ipp_meter_wire" id="ipp_meter_wire" value="{{clean_data.30}}"></td>
+
+                <td>Installation date</td>
+                <td><input type="text" name="ipp_meter_install_date" id="ipp_meter_install_date" maxlength="12" value="{{clean_data.31}}"></td>
+
+            </tr>
+             <tr>
+                  <td>Decommissioning date</td>
+                <td><input type="text"  name="ipp_meter_decom_date" id="ipp_meter_decom_date" maxlength="12" value="{{clean_data.32}}"></td>
+                <td>Access</td>
+                 <td><input type="text" name="ipp_meter_access" id="ipp_meter_access" value="{{clean_data.33}}"></td>
+
+            <tr>
+                <td>IP Address</td>
+                <td><input type="text" name="ipp_ip_address" id="ipp_ip_address" maxlength="20" value="{{clean_data.34}}"></td>
+             <td>Avail Interfaces</td>
+                <td><input type="text"  name="ipp_meter_interfaces" id="ipp_meter_interfaces" maxlength="40" value="{{clean_data.35}}"></td>
+            </tr>
+            <tr>
+                <td>Communication Protocols</td>
+                <td><input type="text"  name="ipp_meter_comm_protocols" id="ipp_meter_comm_protocols" maxlength="20" value="{{clean_data.36}}"></td>
+                <td>Protocol Used</td>
+                <td><input type="text"  name="ipp_meter_protocol_used" id="ipp_meter_protocol_used" maxlength="10" value="{{clean_data.37}}"></td>
+            </tr>
+
+             <tr>
+               <th colspan="4" style="font-size:1.5em;">CHECK METER DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="ipp_meter_manu_ch" id="ipp_meter_manu_ch" maxlength="15" value="{{clean_data.38}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="ipp_meter_type_ch" id="ipp_meter_type_ch" maxlength="15" value="{{clean_data.39}}"></td>
+            </tr>
+             <tr>
+                <td>Meter No</td>
+                <td><input type="text" name="ipp_meter_no_ch" id="ipp_meter_no_ch" maxlength="15" value="{{clean_data.40}}"></td>
+                <td>Y.O.M</td>
+                <td><input type="text"  name="ipp_YOM_ch" id="ipp_YOM_ch" maxlength="15" value="{{clean_data.41}}"></td>
+            </tr>
+             <tr>
+                <td>Accuracy Class</td>
+                <td><input type="text" name="ipp_meter_acc_class_ch" id="ipp_meter_acc_class_ch" maxlength="5" value="{{clean_data.42}}"></td>
+                  <td>No. Of Elements:</td>
+                 <td><input type="text" name="ipp_meter_elements_ch" id="ipp_meter_elements_ch" value="{{clean_data.43}}"></td>
+                   </tr>
+            <tr>
+                      <td>Wired as:</td>
+                <td><input type="text" name="ipp_meter_wire_ch" id="ipp_meter_wire_ch" value="{{clean_data.44}}"></td>
+
+                <td>Installation date</td>
+                <td><input type="text" name="ipp_meter_install_date_ch" id="ipp_meter_install_date_ch" maxlength="12" value="{{clean_data.45}}"></td>
+
+            </tr>
+             <tr>
+                  <td>Decommissioning date</td>
+                <td><input type="text"  name="ipp_meter_decom_date_ch" id="ipp_meter_decom_date_ch" maxlength="12" value="{{clean_data.46}}"></td>
+                <td>Access</td>
+                 <td><input type="text" name="ipp_meter_access_ch" id="ipp_meter_access_ch" value="{{clean_data.47}}"></td>
+
+            </tr>
+            <tr>
+                <td>IP Address</td>
+                <td><input type="text" name="ipp_ip_address_ch" id="ipp_ip_address_ch" maxlength="20" value="{{clean_data.48}}"></td>
+                 <td>Avail Interfaces</td>
+                <td><input type="text"  name="ipp_meter_interfaces_ch" id="ipp_meter_interfaces_ch" maxlength="40" value="{{clean_data.49}}"></td>
+            </tr>
+            <tr>
+                <td>Communication Protocols</td>
+                <td><input type="text"  name="ipp_meter_comm_protocols_ch" id="ipp_meter_comm_protocols_ch" maxlength="15" value="{{clean_data.50}}"></td>
+                <td>Protocol Used</td>
+                <td><input type="text"  name="ipp_meter_protocol_used_ch" id="ipp_meter_protocol_used_ch" maxlength="10" value="{{clean_data.51}}"></td>
+            </tr>
+            <tr>
+
+            </tbody>
+        </table>
+<!--          <button type="submit">Submit</button>-->
+    </form>
+</div>
+</body>
+</html>
+
+<style>
+    body{background-color: #F2F7F9;}
+    table, th, td {
+  border: 1px solid black;
+}
+tr{height:20px;font-size:1.2em;}
+table{width:90%; margin:auto;}
+input {font-size:1.5em;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center; background-color: #F2F7F9;
+}
+
+button{font-size: 2em; width: 45%; padding: 5px; border: 2px solid green; border-radius: 20px;
+    margin-left: 30%; margin-top: 1em;}
+    button:hover{color:white; background:crimson; border:crimson;}
+    form{border:2px solid black; padding:20px}
+</style>
+
 </body>
 </html>

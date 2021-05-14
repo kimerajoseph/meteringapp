@@ -1,10 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-$END$
+<div class="load_profile">
+    <a href="javascript:kimera()"><h1>Daily Load Profiles</h1></a>
+    <form action="" method="POST" name="lxc" id="lxc" class="form">
+          {% csrf_token %}
+       <label for="" id="mt_lb">Select Meter Category:</label>
+     <select name="meter_cat" id="meter_cat" >
+            <option value=""selected disabled>Select category</option>
+            <option value="sub">Substaion Meter</option>
+             <option value="ipp">IPP Meter</option>
+             <option value="stand">Standalone Meter</option>
+        </select>
+        <br>
+        <br>
+    </form>
+    <form action="{% url 'plotly_lp_one' %}" method="POST" name="sub_det" id="sub_det" class="form">
+          {% csrf_token %}
+          <label for="" >Select Substation:</label>
+     <select name="sub_list" id="sub_list" >
+            <option value=""selected disabled>Select substation</option>
+        </select>
+
+        <label for="" >Feeder Name:</label>
+        <select name="feed_name" id="feed_name" >
+            <option value=""selected disabled>Select feeder</option>
+
+        </select>
+        <br>
+        <br>
+        <button type="submit">Generate</button>
+    </form>
+
+<!--    IPP SINGLE DAY-->
+        <form action="{% url 'plotly_lp_one' %}" method="POST" name="ipp_det" id="ipp_det" class="form">
+          {% csrf_token %}
+          <label for="" >Select IPP:</label>
+     <select name="ipp_list" id="ipp_list" >
+            <option value=""selected disabled>Select IPP</option>
+        </select>
+        <label for="" >Feeder Name:</label>
+        <select name="feed_name_ipp" id="feed_name_ipp" >
+            <option value=""selected disabled>Select feeder</option>
+            <option value="33">33</option>
+        </select>
+        <br>
+        <br>
+        <button type="submit">Generate</button>
+    </form>
+
+    <!--STANDALONE SINGLE DAY FORM-->
+    <form action="{% url 'plotly_lp_one' %}" method="POST" name="stand_det" id="stand_det" class="form">
+          {% csrf_token %}
+          <label for="" >Select District:</label>
+     <select name="dist_list" id="dist_list" >
+            <option value=""selected disabled>Select District</option>
+        </select>
+        <label for="" >Feeder Name:</label>
+        <select name="feed_name_stand" id="feed_name_stand" >
+            <option value=""selected disabled>Select feeder</option>
+
+        </select>
+        <br>
+        <br>
+        <button type="submit">Generate</button>
+    </form>
+
+    <!--MULTIPLE DAYS LOAD PROFILE-->
+    <a href="javascript:kimera1()"><h1>Multiple Days Load Profiles</h1></a>
+    <form action="" method="POST" name="load_prof_multi" id="load_prof_multi" class="form">
+          {% csrf_token %}
+         <label>Select Meter Category:</label>
+     <select name="meter_cat_m" id="meter_cat_m" >
+            <option value=""selected disabled>Select category</option>
+            <option value="sub">Substaion Meter</option>
+             <option value="ipp">IPP Meter</option>
+             <option value="stand">Standalone Meter</option>
+        </select>
+        <br>
+        <br>
+    </form>
+
+<!--    MULTIPLE DAYS SUBSTATION-->
+    <form action="{% url 'plotly_lp' %}" id="sub_det_m" name="sub_det_m">
+                <label id="sub_l" >Select Substation:</label>
+     <select name="sub_list_m" id="sub_list_m" >
+            <option value=""selected disabled>Select substation</option>
+        </select>
+        <label id="feed_l" >Feeder Name:</label>
+        <select name="feed_name_m" id="feed_name_m" >
+            <option value=""selected disabled>Select feeder</option>
+        </select>
+        <br>
+         <br>
+        <button type="submit">Generate</button>
+        <br>
+        <br>
+    </form>
+
+    <!--    MULTIPLE DAYS IPP-->
+    <form action="{% url 'plotly_lp' %}" name="ipp_det_m" id="ipp_det_m">
+
+     <select name="ipp_list_m" id="ipp_list_m" class="ipp">
+            <option value=""selected disabled>Select IPP</option>
+        </select>
+        <label id="feed_ipp_l" class="ipp">Feeder Name:</label>
+        <select name="feed_name_ipp_m" id="feed_name_ipp_m" class="ipp">
+            <option value=""selected disabled>Select feeder</option>
+        </select>
+         <br>
+         <br>
+        <button type="submit">Generate</button>
+        <br>
+    </form>
+
+    <!--    MULTIPLE DAYS STANDALONE-->
+    <form action="{% url 'plotly_lp' %}" id="stand_det_m" name="stand_det_m">
+
+                <label id="dist_l"  >Select District:</label>
+     <select name="dist_list_m" id="dist_list_m" >
+            <option value=""selected disabled>Select District</option>
+        </select>
+        <label id="dist_feedl" >Feeder Name:</label>
+        <select name="feed_name_stand_m" id="feed_name_stand_m" >
+            <option value=""selected disabled>Select feeder</option>
+        </select>
+         <br>
+         <br>
+        <button type="submit">Generate</button>
+        <br>
+    </form>
+
+</div>
 </body>
 </html>
+<style>
+.load_profile{width:90%;text-align:center;padding:100px;}
+    #load_prof_multi, #lxc,#sub_det, #ipp_det,#stand_det,#sub_det_m, #ipp_det_m,#stand_det_m{display:none} /*SWITCHING OFF ALL FORMS*/
+    select{width:20%;font-size:1.5em;}
+    label{font-size:1.5em;}
+    button {width:20%; margin-left:15%;font-size:1.5em; padding:5px;border:2px solid crimson;}
+     button:hover{color:white; background:crimson; border:crimson;}
+     .sub_det select{width:15%;}
+
+</style>
+<script>
+var ipps = {{ ipp_listall|safe }};
+var subs = {{ final_sub_listall|safe }};
+var stand_list = {{ final_stand_listall|safe }};
+
+    //FIRST OPTION FORMS
+mm1 = document.getElementById('load_prof_multi');
+mm2 = document.getElementById('lxc');
+
+//VARIOUS FORM
+st1 = document.getElementById('sub_det');
+st2 = document.getElementById('ipp_det');
+st3 = document.getElementById('stand_det');
+st4 = document.getElementById('sub_det_m');
+st5 = document.getElementById('ipp_det_m');
+st6 = document.getElementById('stand_det_m');
+
+function kimera(){
+mm2.style.display = "block";
+mm1.style.display = 'none';
+st1.style.display = 'none';
+st2.style.display = 'none';
+st3.style.display = 'none';
+st4.style.display = 'none';
+st5.style.display = 'none';
+st6.style.display = 'none';
+}
+
+function kimera1(){
+mm1.style.display = "block";
+mm2.style.display = 'none';
+st1.style.display = 'none';
+st2.style.display = 'none';
+st3.style.display = 'none';
+st4.style.display = 'none';
+st5.style.display = 'none';
+st6.style.display = 'none';
+}
+document.getElementById('meter_cat').addEventListener("change", function() {
+var x = this.value;
+if (x == 'sub'){
+st1.style.display = "block";
+st2.style.display = "none";
+st3.style.display = "none";
+var select = document.getElementById("sub_list");
+for (var i = 0; i<subs.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(subs[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);
+}
+}
+if (x == 'ipp'){
+st2.style.display = "block";
+st1.style.display = "none";
+st3.style.display = "none";
+var select = document.getElementById("ipp_list");
+for (var i = 0; i<ipps.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(ipps[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);
+}
+}
+if (x == 'stand'){
+<!--stand_list = ["Gulu", "Masaka", "Kalungu","Kisoro","Mutukula"]-->
+st3.style.display = "block";
+st1.style.display = "none";
+st2.style.display = "none";
+var select = document.getElementById("dist_list");
+for (var i = 0; i<stand_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(stand_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);
+}
+}
+});
+<!--document.getElementById('lp_month').addEventListener("change", function() {-->
+<!--req_month = this.value;-->
+<!--console.log(req_month);-->
+<!--});-->
+<!--var kintu = {{ month_list|safe }};-->
+<!--console.log(kintu);-->
+<!--len = kintu.length;-->
+<!--console.log(len);-->
+
+<!--var select = document.getElementById("kimx");-->
+<!--for (var i = 0; i<kintu.length; i++){-->
+<!--var option = document.createElement("OPTION"),-->
+<!--txt = document.createTextNode(kintu[i]);-->
+<!--option.appendChild(txt);-->
+<!--select.insertBefore(option,select.lastChild);-->
+<!--}-->
+
+<!--CRSF TOKEN-->
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+const request = new Request(
+<!--    /* URL */,-->
+    {headers: {'X-CSRFToken': csrftoken}}
+);
+
+<!--SUBSTATION FUNCTIONS SINGLE DAY-->
+
+document.getElementById('sub_list').addEventListener("change", function() {
+var selected_sub = this.value;
+console.log(selected_sub);
+$.ajax({
+"type":"POST",
+"url":'feeder_list',
+"dataType":"json",
+data:{'selected_sub':selected_sub,},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+success:function(data) {
+          //your returned python list
+          new_list = data['finals']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+          var select = document.getElementById("feed_name");
+          var i, L = select.options.length - 1;
+   for(i = L; i >= 1; i--) {
+      select.remove(i);}
+for (var i = 0; i<new_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(new_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);}
+          }
+});
+});
+
+<!--IPP FUNCTIONS SINGLE DAY-->
+document.getElementById('ipp_list').addEventListener("change", function() {
+var selected_ipp = this.value;
+console.log(selected_ipp);
+$.ajax({
+"type":"POST",
+"url":'ipp_feeder_list',
+"dataType":"json",
+data:{'selected_ipp':selected_ipp,},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+success:function(data) {
+          //your returned python list
+          new_list = data['finals_ipp']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+          var select = document.getElementById("feed_name_ipp");
+          var i, L = select.options.length - 1;
+   for(i = L; i >= 1; i--) {
+      select.remove(i);}
+for (var i = 0; i<new_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(new_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);}
+          }
+});
+});
+
+
+<!--STANDALONE FUNCTIONS SINGLE DAY-->
+document.getElementById('dist_list').addEventListener("change", function() {
+var selected_dist = this.value;
+console.log(selected_dist);
+$.ajax({
+"type":"POST",
+"url":'stand_feeder_list',
+"dataType":"json",
+data:{'selected_dist':selected_dist,},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+success:function(data) {
+          //your returned python list
+          new_list = data['finals_stand']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+          var select = document.getElementById("feed_name_stand");
+          var i, L = select.options.length - 1;
+   for(i = L; i >= 1; i--) {
+      select.remove(i);}
+for (var i = 0; i<new_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(new_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);}
+          }
+});
+});
+
+
+<!--CODE FOR MULTIPLE DAYS LOAD PROFILES-->
+document.getElementById('meter_cat_m').addEventListener("change", function() {
+var x = this.value;
+if (x == 'sub'){
+mm1.style.display = "block";
+mm2.style.display = 'none';
+st1.style.display = 'none';
+st2.style.display = 'none';
+st3.style.display = 'none';
+st4.style.display = 'block';
+st5.style.display = 'none';
+st6.style.display = 'none';
+
+var select = document.getElementById("sub_list_m");
+for (var i = 0; i<subs.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(subs[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);
+}
+}
+document.getElementById('sub_list_m').addEventListener("change", function() {
+var selected_sub = this.value;
+console.log(selected_sub);
+$.ajax({
+"type":"POST",
+"url":'feeder_list',
+"dataType":"json",
+data:{'selected_sub':selected_sub,},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+success:function(data) {
+          //your returned python list
+          new_list = data['finals']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+          var select = document.getElementById("feed_name_m");
+          var i, L = select.options.length - 1;
+   for(i = L; i >= 1; i--) {
+      select.remove(i);}
+for (var i = 0; i<new_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(new_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);}
+          }
+});
+});
+});
+
+
+<!--CODE FOR MULTIPLE DAYS LOAD PROFILES IPP-->
+document.getElementById('meter_cat_m').addEventListener("change", function() {
+var x = this.value;
+if (x == 'ipp'){
+mm1.style.display = "block";
+mm2.style.display = 'none';
+st1.style.display = 'none';
+st2.style.display = 'none';
+st3.style.display = 'none';
+st4.style.display = 'none';
+st5.style.display = 'block';
+st6.style.display = 'none';
+
+var select = document.getElementById("ipp_list_m");
+for (var i = 0; i<ipps.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(ipps[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);
+}
+}
+document.getElementById('ipp_list_m').addEventListener("change", function() {
+var selected_ipp = this.value;
+console.log(selected_ipp);
+$.ajax({
+"type":"POST",
+"url":'ipp_feeder_list',
+"dataType":"json",
+data:{'selected_ipp':selected_ipp,},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+success:function(data) {
+          //your returned python list
+          new_list = data['finals_ipp']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+          var select = document.getElementById("feed_name_ipp_m");
+          var i, L = select.options.length - 1;
+   for(i = L; i >= 1; i--) {
+      select.remove(i);}
+for (var i = 0; i<new_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(new_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);}
+          }
+});
+});
+});
+
+
+<!--CODE FOR MULTIPLE DAYS LOAD PROFILES STANDALONE-->
+document.getElementById('meter_cat_m').addEventListener("change", function() {
+var x = this.value;
+if (x == 'stand'){
+mm1.style.display = "block";
+mm2.style.display = "none";
+st1.style.display = 'none';
+st2.style.display = 'none';
+st3.style.display = 'none';
+st4.style.display = 'none';
+st5.style.display = 'none';
+st6.style.display = 'block';
+
+var select = document.getElementById("dist_list_m");
+for (var i = 0; i<stand_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(stand_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);
+}
+}
+document.getElementById('dist_list_m').addEventListener("change", function() {
+var selected_dist = this.value;
+console.log(selected_dist);
+$.ajax({
+"type":"POST",
+"url":'stand_feeder_list',
+"dataType":"json",
+data:{'selected_dist':selected_dist,},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+success:function(data) {
+          //your returned python list
+          new_list = data['finals_stand']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+          var select = document.getElementById("feed_name_stand_m");
+          var i, L = select.options.length - 1;
+   for(i = L; i >= 1; i--) {
+      select.remove(i);}
+for (var i = 0; i<new_list.length; i++){
+var option = document.createElement("OPTION"),
+txt = document.createTextNode(new_list[i]);
+option.appendChild(txt);
+select.insertBefore(option,select.lastChild);}
+          }
+});
+});
+});
+</script>
+

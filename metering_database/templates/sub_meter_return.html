@@ -1,10 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <div style="margin-top:0em;margin-right:2em;" class="login">
+    <a href="homepage" style="float:right;"><h1>Log Out</h1></a>
+    <h1 style="float:left;">Welcome to UETCL Metering Portal: <span style="color:crimson;width:10%;">{{user}}</span></h1>
+</div>
 </head>
 <body>
-$END$
+<div class="all_contents">
+    <div class="contents">
+           <h1 style="font-size:2.5em;">Contents</h1>
+       <a href="javascript:kimera1()"><h2>Test Reports</h2></a>
+    <div class="test_reports" id="test_reports">
+        <a href="{{list_ct.0}}"><h3 id="level_1">CT Reports</h3></a>
+        <a href="{{list_ct.1}}"><h3 id="level_2">VT Reports</h3></a>
+        <a href="{{list_ct.2}}"><h3 id="level_3">Energy Meter Reports</h3></a>
+        <a href="{{list_ct.3}}"><h3 id="level_4">Field Report</h3></a>
+    </div>
+       <a href="javascript:kimera2()"><H2>Configuration Files</H2></a>
+    <div class="config-file" id="config-file">
+
+        <a href=""><h3 id="main_conf">Main Meter Config File</h3></a>
+        <a href=""><h3 id="check_conf">Check Meter Config File</h3></a>
+    </div>
+       <a href="javascript:kimerax()"><h2>Commisioning Report</h2></a>
+    <div class="comm-report" id="comm-report">
+
+        <a href=""><h3 id="commx_report">Commisioning Report</h3></a>
+    </div>
+
+<!--        GENERATING A NODE REPORT-->
+         <a href="javascript:kimera()"><h2>Generate Node Report</h2></a>
+         <a href="javascript:nodeloss()"><h2>Node Loss</h2></a>
+
+    <a href="javascript:kimera3()"><h2>Metering Node Details</h2></a>
+
+    <div class="outstanding">
+        <a href=""><h2>FAQs</h2></a>
+    </div>
+    </div>
+    <div class="form_container" id="form_container">
+<h4 style="visibility:hidden;">UETCL EMIS</h4>
+ <form action="" name="sub_newmeter" id="sub_newmeter" method="POST">
+        {% csrf_token %}
+
+        <table>
+            <thead>
+            <tr>
+                <th colspan="4"><h2>UETCL SUBSTATION METER DETAILS</h2></th>
+            </tr>
+            <tr>
+                <th colspan="4" style="font-size:1.5em;">LOCATION:</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Substation:</td>
+                <td><input type="text" name="sub" id="sub"  maxlength="15" value="{{clean_data.0}}"></td>
+                <td>Voltage (kV) :</td>
+                <td><input type="text" name="voltage" id="voltage"  maxlength="15" value="{{clean_data.1}}"></td>
+            </tr>
+            <tr>
+              <td>District:</td>
+                <td><input type="text" name="sub_dist" id="sub_dist" maxlength="15" value="{{clean_data.2}}"></td>
+                 <td>Region:</td>
+                <td><input type="text" name="sub_region" id="sub_region" maxlength="15" value="{{clean_data.3}}"></td>
+            </tr>
+            <td>Coordinates (X)</td>
+                <td><input type="text" name="sub_cord_x" id="sub_cord_x" maxlength="10" value="{{clean_data.4}}"></td>
+                 <td>Coordinates (Y)</td>
+                <td><input type="text" name="sub_cord_y" id="sub_cord_y" maxlength="10" value="{{clean_data.5}}"></td>
+            </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.5em;">FEEDER DETAILS,OWNER AND DISTRIBUTORS:</th>
+            <tr>
+                  <td>Component:</td>
+             <td><input type="text" name="comp" id="comp" maxlength="10" value="{{clean_data.6}}"></td>
+                        <td>Capacity (MVA):</td>
+     <td><input type="text" name="capacity" id="capacity" maxlength="7" value="{{clean_data.7}}"></td>
+            </tr>
+
+            <tr>
+                 <td>Network Type:</td>
+                 <td><input type="text" name="net_type" id="net_type" maxlength="10" value="{{clean_data.8}}"></td>
+                <td>Component Name:</td>
+                <td><input type="text" name="sub_feeder" id="sub_feeder" maxlength="35" value="{{clean_data.9}}"></td>
+
+            </tr>
+            <tr>
+                 <td>Component Voltage (kV):</td>
+                <td><input type="number" name="sub_feeder_voltage" id="sub_feeder_voltage" maxlength="5" value="{{clean_data.10}}"></td>
+
+                <td>Meter Owner:</td>
+                <td><input type="text" name="sub_meter_owner" id="sub_meter_owner" maxlength="15" value="{{clean_data.11}}"></td>
+
+            </tr>
+            <tr>
+                 <td>Distributor:</td>
+                <td><input type="text" name="distributor" id="distributor" maxlength="15" value="{{clean_data.12}}"></td>
+                <td>Comments:</td>
+                <td colspan="3"><input type="text"  name="subs_contractor" id="subs_contractor" maxlength="30" value="{{clean_data.13}}"></td>
+
+            </tr>
+            <tr>
+               <th colspan="4" style="font-size:1.3em;">CT AND VT DETAILS:</th>
+            </tr>
+            <tr>
+                <td>CT Manufacturer</td>
+                <td><input type="text" name="sub_ct_manu" id="sub_ct_manu" maxlength="25" value="{{clean_data.14}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="sub_ct_type" id="sub_ct_type" maxlength="15" value="{{clean_data.15}}"></td>
+            </tr>
+
+            <tr>
+                <td>No. of Metering CT cores</td>
+                <td><input type="number" name="sub_ct_cores" id="sub_ct_cores" maxlength="3" value="{{clean_data.16}}"></td>
+                <td>CT Core ratios</td>
+                <td><input type="text" name="sub_ct_core_ratios" maxlength="20" value="{{clean_data.17}}"></td>
+            </tr>
+            <tr>
+                <td>CT core Used</td>
+                <td><input type="text" name="sub_core_used" id="sub_core_used" maxlength="10" value="{{clean_data.18}}"></td>
+                <td>Accuracy class</td>
+                <td><input type="text"  name="sub_accuracy_class" id="sub_accuracy_class" maxlength="5" value="{{clean_data.19}}"></td>
+            </tr>
+            <tr>
+                <td>No. of Available spares</td>
+                <td><input type="text" name="sub_avail_spares" id="sub_avail_spares" maxlength="3" value="{{clean_data.20}}"></td>
+                <td>Spares Class</td>
+                <td><input type="text"  name="sub_spares_class" id="sub_spares_class" maxlength="10" value="{{clean_data.21}}"></td>
+            </tr>
+             <tr>
+                <td>VT Manufacturer</td>
+                <td><input type="text" name="sub_vt_manu" id="sub_vt_manu" maxlength="15" value="{{clean_data.22}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="sub_VT_type" id="sub_VT_type" maxlength="15" value="{{clean_data.23}}"></td>
+            </tr>
+                   <tr>
+                        <td>VT Ratio</td>
+                <td><input type="text" name="sub_vt_ratio" id="sub_vt_ratio" maxlength="10" value="{{clean_data.24}}"></td>
+                       <td>VT Accuracy</td>
+                <td><input type="text" name="sub_vt_accuracy" id="sub_vt_accuracy" maxlength="5" value="{{clean_data.25}}"></td>
+                   </tr>
+
+               <th colspan="4" style="font-size:1.5em;">MAIN ENERGY METER DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="sub_meter_manu" id="sub_meter_manu" maxlength="15" value="{{clean_data.26}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="sub_meter_type" id="sub_meter_type" maxlength="15" value="{{clean_data.27}}"></td>
+            </tr>
+             <tr>
+                <td>Meter No</td>
+                <td><input type="text" name="sub_meter_no" id="sub_meter_no" maxlength="15" value="{{clean_data.28}}"></td>
+                <td>Y.O.M</td>
+                <td><input type="text"  name="sub_YOM" id="sub_YOM" maxlength="15" value="{{clean_data.29}}"></td>
+            </tr>
+             <tr>
+                <td>Accuracy Class</td>
+                <td><input type="text" name="sub_meter_acc_class" id="sub_meter_acc_class" maxlength="5" value="{{clean_data.30}}"></td>
+                  <td>No. Of Elements:</td>
+                 <td><input type="text"name="sub_meter_elements" id="sub_meter_elements" value="{{clean_data.31}}"></td>
+              </tr>
+            <tr>
+                  <td>Wired as:</td>
+                <td><input type="text" name="sub_meter_wire" id="sub_meter_wire" value="{{clean_data.32}}"></td>
+
+                <td>Installation date</td>
+                <td><input type="text" name="sub_meter_install_date" id="sub_meter_install_date" maxlength="12" value="{{clean_data.33}}"></td>
+
+            </tr>
+             <tr>
+                  <td>Decommissioning date</td>
+                <td><input type="text"  name="sub_meter_decom_date" id="sub_meter_decom_date" maxlength="12" value="{{clean_data.34}}"></td>
+                <td>Access</td>
+                 <td><input type="text" name="sub_meter_access" id="sub_meter_access" value="{{clean_data.35}}"></td>
+            <tr>
+                <td>IP Address</td>
+                <td><input type="text" name="sub_ip_address" id="sub_ip_address" maxlength="20" value="{{clean_data.36}}"></td>
+             <td>Avail Interfaces</td>
+                <td><input type="text"  name="sub_meter_interfaces" id="sub_meter_interfaces" maxlength="40" value="{{clean_data.37}}"></td>
+            </tr>
+            <tr>
+                <td>Communication Protocols</td>
+                <td><input type="text"  name="sub_meter_comm_protocols" id="sub_meter_comm_protocols" maxlength="20" value="{{clean_data.38}}"></td>
+                <td>Protocol Used</td>
+                <td><input type="text" name="sub_meter_protocol_used" id="sub_meter_protocol_used" maxlength="10" value="{{clean_data.39}}"></td>
+            </tr>
+
+             <tr>
+               <th colspan="4" style="font-size:1.5em;">CHECK METER DETAILS:</th>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td><input type="text" name="sub_meter_manu_ch" id="sub_meter_manu_ch" maxlength="15" value="{{clean_data.40}}"></td>
+                <td>Type:</td>
+                <td><input type="text" name="sub_meter_type_ch" id="sub_meter_type_ch" maxlength="15" value="{{clean_data.41}}"></td>
+            </tr>
+             <tr>
+                <td>Meter No</td>
+                <td><input type="text" name="sub_meter_no_ch" id="sub_meter_no_ch" maxlength="15" value="{{clean_data.42}}"></td>
+                <td>Y.O.M</td>
+                <td><input type="text"  name="sub_YOM_ch" id="sub_YOM_ch" maxlength="15" value="{{clean_data.43}}"></td>
+            </tr>
+             <tr>
+                <td>Accuracy Class</td>
+                <td><input type="text" name="sub_meter_acc_class_ch" id="sub_meter_acc_class_ch" maxlength="5" value="{{clean_data.44}}"></td>
+                  <td>No. Of Elements:</td>
+                 <td><input type="text" name="sub_meter_elements_ch" id="sub_meter_elements_ch" value="{{clean_data.45}}"></td>
+
+            </tr>
+            <tr>
+                      <td>Wired as:</td>
+                <td><input type="text" name="sub_meter_wire_ch" id="sub_meter_wire_ch" value="{{clean_data.46}}"></td>
+
+                <td>Installation date</td>
+                <td><input type="text" name="sub_meter_install_date_ch" id="sub_meter_install_date_ch" maxlength="12" value="{{clean_data.47}}"></td>
+
+            </tr>
+             <tr>
+                  <td>Decommissioning date</td>
+                <td><input type="text"  name="sub_meter_decom_date_ch" id="sub_meter_decom_date_ch" maxlength="12" value="{{clean_data.48}}"></td>
+                <td>Access</td>
+                 <td><input type="text" name="sub_meter_access_ch" id="sub_meter_access_ch" value="{{clean_data.49}}"></td>
+
+            </tr>
+            <tr>
+                <td>IP Address</td>
+                <td><input type="text" name="sub_ip_address_ch" id="sub_ip_address_ch" maxlength="20" value="{{clean_data.50}}"></td>
+                 <td>Avail Interfaces</td>
+                <td><input type="text" name="sub_meter_interfaces_ch" id="sub_meter_interfaces_ch" maxlength="40" value="{{clean_data.51}}"></td>
+            </tr>
+            <tr>
+                <td>Communication Protocols</td>
+                <td><input type="text"  name="sub_meter_comm_protocols_ch" id="sub_meter_comm_protocols_ch" maxlength="15" value="{{clean_data.52}}"></td>
+                <td>Protocol Used</td>
+                <td><input type="text"  name="sub_meter_protocol_used_ch" id="sub_meter_protocol_used_ch" maxlength="10" value="{{clean_data.53}}"></td>
+            </tr>
+            <tr>
+
+            </tbody>
+        </table>
+
+<!--          <button type="submit">Back </button>-->
+    </form>
+<!--        START OF NODE REPORT FORM AND TABLE-->
+
+            <div class="node-report" id="node-report">
+                <label for="">Month</label>
+                <select name="month_node" id="month_node">
+                      {% for ll in month_names_in_year %}
+                   <option value="{{ll}}">{{ll}}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="">Year</label>
+                <select name="year_node" id="year_node">
+                    {% for xc in use_year_list %}
+                   <option value="{{xc}}">{{xc}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                <button type="submit" onclick="myFunction_x()">Generate</button>
+                <br>
+                <br>
+        <table id="node-table">
+            <thead>
+            <tr>
+                <th style="font-size:1.8em;" colspan="4">
+                    NODE REPORT FOR <span style="text-transform:uppercase;">{{clean_data.9}}</span></th>
+            </tr>
+            <tr>
+                <th colspan="2"><h2>Month & Year</h2></th>
+                <td colspan="2"><input type="text" id="month_years"></td>
+            </tr>
+            </thead>
+            <tr>
+            <th style="font-size:1.5em;" colspan="4">POWER IN POSITIVE DIRECTION</th>
+        </tr>
+              <tr>
+                <td>Average Loading (MW)</td>
+                <td><input type="text" id="av_load"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="av_load_perc"></td>
+            </tr>
+            <tr>
+                <td>Max Loading (MW)</td>
+                <td><input type="text" id="max_load"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="max_load_perc"></td>
+            </tr>
+
+             <tr>
+                <td>Min Loading (MW)</td>
+                <td><input type="text" id="min_load"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="min_load_perc"></td>
+            </tr>
+              <tr>
+            <th style="font-size:1.5em;" colspan="4">CT LOADING IN POSITIVE DIRECTION</th>
+        </tr>
+             <tr>
+                <td>Average CT Loading(%)</td>
+                <td><input type="text" id="av_ct"></td>
+                <td>Maximum CT Loading(%)</td>
+                <td><input type="text" id="max_ct"></td>
+            </tr>
+             <tr>
+                <td>Minimum CT Loading(%)</td>
+                <td><input type="text" id="min_ct"></td>
+
+            </tr>
+
+             <tr>
+            <th style="font-size:1.5em;" colspan="4">VOLTAGE IN POSITIVE DIRECTION</th>
+        </tr>
+             <tr>
+                <td>Average Voltage (kV)</td>
+                <td><input type="text" id="av_v"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="perc_av_v"></td>
+            </tr>
+             <tr>
+                <td>Maximum Voltage (kV)</td>
+                <td><input type="text" id="max_v"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="perc_max_v"></td>
+            </tr>
+              <tr>
+                <td>Minimum Voltage (kV)</td>
+                <td><input type="text" id="min_v"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="perc_min_v"></td>
+            </tr>
+                     <tr>
+            <th style="font-size:1.5em;" colspan="4">POWER FACTOR</th>
+        </tr>
+              <tr>
+                  <td>Average PF</td>
+                <td><input type="text" step="0.01" id="av_PF"></td>
+                <td>Highest PF</td>
+                <td><input type="text" step="0.01" id="h_PF"></td>
+
+            </tr>
+        <tr>
+            <td>Lowest PF</td>
+                <td><input type="text" id="l_PF" ></td>
+        </tr>
+         <tr>
+            <th style="font-size:1.5em;" colspan="4">POWER IN NEGATIVE DIRECTION</th>
+        </tr>
+             <tr>
+                <td>Average Loading (MW)</td>
+                <td><input type="text" id="opp_av_load"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="opp_av_load_p"></td>
+            </tr>
+            <tr>
+                <td>Maximum Loading (MW)</td>
+                <td><input type="text" id="opp_max_load"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="opp_max_load_p"></td>
+            </tr>
+             <tr>
+                <td>Minimum Loading (MW)</td>
+                <td><input type="text" id="opp_min_load"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="opp_min_load_p"></td>
+            </tr>
+
+              <tr>
+            <th style="font-size:1.5em;" colspan="4">POWER FACTOR</th>
+        </tr>
+              <tr>
+                  <td>Average PF</td>
+                <td><input type="text" step="0.01" id="av_PF_n"></td>
+                <td>Highest PF</td>
+                <td><input type="text" step="0.01" id="h_PF_n"></td>
+
+            </tr>
+        <tr>
+            <td>Lowest PF</td>
+                <td><input type="text" id="l_PF_n" ></td>
+        </tr>
+                <tr>
+            <th style="font-size:1.5em;" colspan="4">CT LOADING IN NEGATIVE DIRECTION</th>
+        </tr>
+             <tr>
+                <td>Average CT Loading(%)</td>
+                <td><input type="text" id="av_ct_n"></td>
+                <td>Maximum CT Loading(%)</td>
+                <td><input type="text" id="max_ct_n"></td>
+            </tr>
+             <tr>
+                <td>Minimum CT Loading(%)</td>
+                <td><input type="text" id="min_ct_n"></td>
+
+            </tr>
+
+             <tr>
+            <th style="font-size:1.5em;" colspan="4">VOLTAGE IN NEGATIVE DIRECTION</th>
+        </tr>
+             <tr>
+                <td>Average Voltage (kV)</td>
+                <td><input type="text" id="av_v_n"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="perc_av_v_n"></td>
+            </tr>
+             <tr>
+                <td>Maximum Voltage (kV)</td>
+                <td><input type="text" id="max_v_n"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="perc_max_v_n"></td>
+            </tr>
+              <tr>
+                <td>Minimum Voltage (kV)</td>
+                <td><input type="text" id="min_v_n"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="perc_min_v_n"></td>
+            </tr>
+
+        </table>
+
+    </div>
+        <!--        END OF NODE REPORT FORM AND TABLE-->
+
+<!--        START OF LOSS REPORT REQUEST AND TABLE-->
+        <div class="loss-request" id="loss-request">
+      <label for="">Month</label>
+                <select name="month_node_loss" id="month_node_loss">
+                    <option value="" selected disabled>Select Month</option>
+                      {% for ll in month_names_in_year %}
+                   <option value="{{ll}}">{{ll}}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="">Year</label>
+                <select name="year_node_loss" id="year_node_loss">
+                    <option value="" selected disabled>Select Year</option>
+                    {% for xc in use_year_list %}
+                   <option value="{{xc}}">{{xc}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                <button type="submit" onclick="myFunction_loss()">Generate</button>
+                <br>
+                <br>
+                <table id="node_loss_table">
+            <thead>
+            <tr>
+                <th style="font-size:1.8em;" colspan="4">
+                    NODE LOSS REPORT FOR <span style="text-transform:uppercase;">{{clean_data.9}}</span></th>
+            </tr>
+            <tr>
+                <th colspan="2"><h2>Month & Year</h2></th>
+                <td colspan="2"><input type="text" id="month_years_l"></td>
+            </tr>
+            </thead>
+            <tr>
+            <th style="font-size:1.5em;" colspan="4">POWER IN POSITIVE DIRECTION</th>
+        </tr>
+              <tr>
+                <td>Average Loss (MW)</td>
+                <td><input type="text" id="av_loss"></td>
+<!--                <td>Percentage</td>-->
+<!--                <td><input type="text" id="av_loss_perc"></td>-->
+            </tr>
+            <tr>
+                <td>Max Loss (MW)</td>
+                <td><input type="text" id="max_loss"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="max_loss_perc"></td>
+
+            </tr>
+
+        <tr>
+            <td style="text-align:center;" colspan="4"><a href="javascript:maxloss()">View Details</a></td>
+        </tr>
+                    <tr id="hide_row" class="hide_row">
+                        <td>Datetime</td>
+                        <td><input type="text" id="max_loss_datetime"></td>
+                           <td>Power Sending(MW)</td>
+                        <td><input type="text" id="max_loss_pw"></td>
+                    </tr>
+                    <tr class="hide_row">
+
+                    </tr>
+
+             <tr>
+                <td>Min Loss(MW)</td>
+                <td><input type="text" id="min_loss"></td>
+                <td>Percentage</td>
+                <td><input type="text" id="min_loss_perc"></td>
+            </tr>
+    <tr>
+            <td style="text-align:center;" colspan="4"><a href="javascript:minloss()">View Details</a></td>
+        </tr>
+
+        </table>
+        </div>
+        <!--        END OF LOSS REPORT REQUEST AND TABLE-->
+    </div>
+
+
+<!--    </div>-->
+<!--<div class="footer">-->
+
+<!--</div>-->
+</div>
 </body>
+
 </html>
+
+<style>
+/*body{background-color: #cccccc;}*/
+.login{width:100%;height:50px;background:#09ADE4;padding:10px;}
+    .contents {width: 20%;float: left;padding-left:15px;background:#09ADE4;min-height:500px;}
+
+.form_container {margin-left: 20%;position:relative;}
+#config-file, #test_reports,#comm-report{display:none;}
+#sub_newmeter,#node-report,#loss-request,#node_loss_table{display:none;}
+.hide_row{display:none;}
+form{border:2px solid black;width:80%; position: absolute;margin-left:10%;}
+    table, th, td {
+  border: 1px solid black;
+}
+table{width:100%;}
+table input {font-size:1.5em;width: 100%;box-sizing: border-box;text-align: center; background-color: #F2F7F9;}
+/*.footer{position:absolute;bottom:0;height:50px;width:100%;background:#09ADE4;}*/
+#node-report,#loss-request{width:80%;margin-left: 10%;text-align:center;}
+#node-report label,#loss-request label {font-size:1.8em;margin-right:1em;}
+#node-report select,#loss-request select{width:20%;font-size:1.5em;text-align:center;margin-right:1em;}
+#node-report button, #loss-request button {width:30%; border:2px solid crimson;font-size:1.5em;padding:5px;}
+#node-report button:hover, #loss-request button:hover{color:white; background:crimson; border:crimson;}
+#node-report table, #loss-request table{display:none;width:100%;}
+#loss-request{width:60%;}
+/*#node-table {}*/
+</style>
+<script>
+//USING SAME SPACE. SWITCH OFF ONE
+//GETTING ALL ITEMS BY ID
+var tr = document.getElementById('comm-report');
+ var tx = document.getElementById('config-file');
+ var e = document.getElementById('test_reports');
+   var f = document.getElementById('node-report');
+  var l = document.getElementById('sub_newmeter');
+  var k = document.getElementById('loss-request');
+
+//GET METER NUMBER
+var sel_meter = document.getElementById("sub_meter_no").value;
+//select_meter = sel_meter.value;
+
+  //DISPLAYING NODE REPORT REQUEST OPTIONS
+function kimera(){
+  tr.style.display = 'none';  //SWITCH OFF THE OTHER FORM
+  tx.style.display = 'none';
+  e.style.display = 'none';
+ l.style.display = 'none';
+ k.style.display = 'none';
+       if(f.style.display == 'block')
+          f.style.display = 'none';
+       else
+          f.style.display = 'block';
+    }
+
+    //DISPLAYING NODE DETAILS
+function kimera3(){
+tr.style.display = 'none';
+  tx.style.display = 'none';
+  e.style.display = 'none';
+ f.style.display = 'none';
+ k.style.display = 'none';
+       if(l.style.display == 'block')
+          l.style.display = 'none';
+       else
+          l.style.display = 'block';
+    }
+
+//DISPLAYING TEST REPORTS (e)
+function kimera1(){
+tr.style.display = 'none';
+  tx.style.display = 'none';
+  l.style.display = 'none';
+ f.style.display = 'none';
+  k.style.display = 'none';
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+
+    //DISPLAYING CONFIGURATION FILES
+function kimera2(){
+tr.style.display = 'none';
+  e.style.display = 'none';
+  l.style.display = 'none';
+ f.style.display = 'none';
+  k.style.display = 'none';
+       if(tx.style.display == 'block')
+          tx.style.display = 'none';
+       else
+          tx.style.display = 'block';
+    }
+
+//DISPLAYING COMMISIONING REPORTS
+function kimerax(){
+e.style.display = 'none';
+ tx.style.display = 'none';
+  l.style.display = 'none';
+ f.style.display = 'none';
+  k.style.display = 'none';
+       if(tr.style.display == 'block')
+          tr.style.display = 'none';
+       else
+          tr.style.display = 'block';
+    }
+
+  //DISPLAYING NODE REPORT REQUEST OPTIONS FOR NODE LOSSES
+function nodeloss(){
+  tr.style.display = 'none';  //SWITCH OFF THE OTHER FORM
+  tx.style.display = 'none';
+  e.style.display = 'none';
+ l.style.display = 'none';
+  f.style.display = 'none';
+       if(k.style.display == 'block')
+          k.style.display = 'none';
+       else
+          k.style.display = 'block';
+    }
+
+   //GETTING VALUES OF NODE-REPORT FORM WHEN USER CHANGES THEM
+document.getElementById('month_node').addEventListener("change", function() {
+month_l = this.value;
+});
+document.getElementById('year_node').addEventListener("change", function() {
+year_ll = this.value;
+});
+
+//GETTING VALUES OF LOSSES REQUEST FORM WHEN USER CHANGES THEM
+document.getElementById('month_node_loss').addEventListener("change", function() {
+month_loss = this.value;
+});
+document.getElementById('year_node_loss').addEventListener("change", function() {
+year_loss = this.value;
+});
+
+
+  //AJAX CALL
+
+<!--CRSF TOKEN-->
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+const request = new Request(
+<!--    /* URL */,-->
+    {headers: {'X-CSRFToken': csrftoken}}
+);
+
+//AJAX FUNCTION
+
+function myFunction_x() {
+var sel_month = document.getElementById("month_node");
+var sel_year = document.getElementById("year_node");
+var sel_meter = document.getElementById("sub_meter_no");
+select_month = sel_month.value;
+select_year = sel_year.value;
+select_meter = sel_meter.value;
+//console.log(select_month);
+//console.log(select_year);
+//sub
+$.ajax({
+"type":"POST",
+"url":'sub_node_report',
+"dataType":"json",
+data:{'select_month':select_month,'select_year':select_year,'select_meter':select_meter},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+
+//AJAX POST ENDS
+
+//SUCCESS FUNCTION
+success:function(data) {
+          //your returned python list
+          new_list = data['finals']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+
+ //MONTH AND YEAR
+var montxxx = month_l.concat(" ", year_ll);
+document.getElementById("month_years").value = montxxx;
+
+//POPULATING TABLE
+document.getElementById("av_load").value = new_list[0];
+document.getElementById("max_load").value = new_list[1];
+document.getElementById("min_load").value = new_list[2];
+document.getElementById("opp_av_load").value = new_list[3];
+document.getElementById("opp_min_load").value = new_list[4];
+document.getElementById("opp_max_load").value = new_list[5];
+
+//POWER FACTOR POSITIVE
+document.getElementById("av_PF").value = new_list[6];
+document.getElementById("h_PF").value = new_list[7];
+document.getElementById("l_PF").value = new_list[8];
+
+//POWER FACTOR NEGATIVE
+document.getElementById("av_PF_n").value = new_list[15];
+document.getElementById("h_PF_n").value = new_list[16];
+ document.getElementById("l_PF_n").value = new_list[17];
+
+//PERCENTAGES
+document.getElementById("av_load_perc").value = new_list[9];
+document.getElementById("max_load_perc").value = new_list[10];
+document.getElementById("min_load_perc").value = new_list[11];
+document.getElementById("opp_av_load_p").value = new_list[12];
+document.getElementById("opp_min_load_p").value = new_list[13];
+document.getElementById("opp_max_load_p").value = new_list[14];
+
+//CURRENTS AND VOLTAGES POSITIVE
+document.getElementById("av_ct").value = new_list[18];
+document.getElementById("max_ct").value = new_list[19];
+document.getElementById("min_ct").value = new_list[20];
+document.getElementById("av_v").value = new_list[21];
+document.getElementById("perc_av_v").value = new_list[22];
+document.getElementById("max_v").value = new_list[23];
+document.getElementById("perc_max_v").value = new_list[24];
+document.getElementById("min_v").value = new_list[25];
+document.getElementById("perc_min_v").value = new_list[26];
+
+//CURRENTS AND VOLTAGES NEGATIVE FLOW
+document.getElementById("av_ct_n").value = new_list[27];
+document.getElementById("max_ct_n").value = new_list[28];
+document.getElementById("min_ct_n").value = new_list[29];
+document.getElementById("av_v_n").value = new_list[30];
+document.getElementById("perc_av_v_n").value = new_list[31];
+document.getElementById("max_v_n").value = new_list[32];
+document.getElementById("perc_max_v_n").value = new_list[33];
+document.getElementById("min_v_n").value = new_list[34];
+document.getElementById("perc_min_v_n").value = new_list[35];
+}
+});
+  xl = document.getElementById("node-table");
+  xl.style.display = 'block';
+}
+
+
+//SECOND AJAX CALL
+//GETTING THE COMPONENT
+var loss_component = document.getElementById("sub_feeder").value;
+console.log(loss_component);
+
+ //MONTH AND YEAR
+var month_loss = document.getElementById("month_node_loss");
+var year_loss = document.getElementById("year_node_loss");
+
+
+function myFunction_loss(){
+
+console.log(month_loss);
+console.log(year_loss);
+$.ajax({
+"type":"POST",
+"url":'sub_node_loss',
+"dataType":"json",
+data:{'month_loss':month_loss,'year_loss':year_loss,'sel_meter':sel_meter,'loss_component':loss_component},
+"headers": { "X-CSRFToken": getCookie("csrftoken") },
+
+//AJAX POST ENDS
+
+//SUCCESS FUNCTION
+success:function(data) {
+          //your returned python list
+          new_list = data['finals']
+          <!--//Now, loop through the new_list and append these items wrapped in <li> tags to your ul. -->
+          console.log(new_list);
+
+   //POPULATING MONTH & YEAR
+var mont_loss = month_loss.concat(" ", year_loss);
+document.getElementById("month_years_l").value = mont_loss;
+
+ //POPULATING NODE LOSS TABLE
+document.getElementById("month_years_l").value = mont_loss;
+document.getElementById("av_loss").value = new_list[0];
+//document.getElementById("av_loss_perc").value = new_list[9];
+document.getElementById("max_loss").value = new_list[1];
+document.getElementById("max_loss_perc").value = new_list[9];
+document.getElementById("min_loss").value = new_list[2];
+document.getElementById("min_loss_perc").value = new_list[16];
+}
+}); //END OF $.ajax
+
+
+
+  xl = document.getElementById("node_loss_table");
+  //xm = document.getElementById("kimz");
+  xl.style.display = 'block';
+  //xm = document.getElementById("kimz");
+// xm.style.display = 'none';
+
+}
+
+//DISPLAY DETAILS OF MIN & MAX LOSSES
+//function maxloss(){
+//max_loss= document.getElementById("hide_row");
+       //if(max_loss.style.display == 'block')
+        //  max_loss.style.display = 'none';
+       //else
+          //max_loss.style.display = 'block';
+    //}
+
+</script>

@@ -5,6 +5,24 @@
     <title>Title</title>
 </head>
 <body>
-
+<form action="{% url 'store_newjob' %}" method="POST" name="job_form" id="job_form" class="form" >
+    {% csrf_token %}
+  {{ form.as_p }}
+    {% if form.errors %}
+<div class="alert alert-danger alert-dismissible col-12 mx-1" role="alert">
+    <div id="form_errors">
+    {% for key, value in form.errors.items %}
+        <span class="fieldWrapper">
+            {{ key }}:{{ value }}
+        </span>
+    {% endfor %}
+</div>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endif %}
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>

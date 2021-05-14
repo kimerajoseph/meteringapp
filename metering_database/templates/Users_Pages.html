@@ -1,10 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>User's Portal</title>
+    <div style="margin-top:0em;margin-right:2em;" class="login">
+    <a href="homepage" style="float:right;"><h1>Log Out</h1></a>
+    <h1 style="float:left;">Welcome to UETCL Metering Portal: <span style="color:crimson;width:10%;">{{user}}</span></h1>
+</div>
 </head>
 <body>
-$END$
+
+<!--MIDDLE MENU-->
+<div class="h_menu">
+    <a href=""><ul>Home</ul></a>
+    <a href=""><ul>Bills</ul></a>
+    <a href=""><ul>Tests</ul></a>
+    <a href=""><ul>Upload Monthly Files</ul></a>
+</div>
+
+<!--LEFT SIDE DIV-->
+<div class="all-content">
+<div class="contents">
+    <h1 style="font-size:2.5em;">Contents</h1>
+    <div class="test_reports">
+        <a href="javascript:kimera1()"><h2>TEST REPORTS</h2></a>
+
+        <a href="{{list_ct.0}}"><h3 id="level_1">CT Reports</h3></a>
+
+        <a href="{{list_ct.1}}"><h3 id="level_2">VT Reports</h3></a>
+        <a href=""><h3 id="level_3">Energy Meter Reports</h3></a>
+    </div>
+    <div class="config-file">
+        <a href="javascript:kimera2()"><H2>CONFIGURATION FILES</H2></a>
+        <a href=""><h3 id="main_conf">Main Meter Config File</h3></a>
+        <a href=""><h3 id="check_conf">Check Meter Config File</h3></a>
+    </div>
+    <div class="energy-bills">
+        <a href="javascript:kimera()"><h2>Energy Bills</h2></a>
+
+    </div>
+    <div class="outstanding">
+        <a href=""><h2>FAQs</h2></a>
+    </div>
+</div>
+
+<!--    RIGHT SIDE DIV-->
+    <div class="content-details">
+        <form action="" id="bill_form">
+            <h1>Generate Bill Here</h1>
+            <label for="">Year:</label>
+        <select name="" id="">
+            <option value="">January</option>
+        </select>
+        <label for="">Month:</label>
+        <select name="" id="">
+            <option value="">2020</option>
+        </select>
+        <br>
+        <br>
+        <button type="submit">View Bill</button>
+        </form>
+    </div>
+    </div>
 </body>
+<!--FOOTER-->
+<div class="footer">
+
+</div>
 </html>
+
+<style>
+.all-content {
+    border: 3px solid #fff;
+    padding: 10px;
+    min-height:600px;
+
+}
+
+.contents,  .content-details{
+    float: left;
+    padding: 5px;
+    width:40%
+
+}
+.contents{min-height:590px;background:#09ADE4;border: 2px solid red;}
+.content-details {background:green;}
+    .login{width:100%;height:50px;background:#09ADE4;padding:10px;}
+     /*#bill_form{display:none;text-align:center;}*/
+    #bill_form button{width:40%;padding:3px;font-size:1.2em;border:2px solid crimson;margin-top:3em;}
+    #bill_form button:hover{color:white; background:crimson; border:crimson;}
+     #bill_form h1{color:blue;font-size:2em;text-decoration:underline;}
+
+    #level_1,#level_2,#level_3{display:none;}
+    #main_conf, #check_conf{display:none;}
+    .h_menu{height:50px;width:100%;background:#5685BF;text-align:center;padding:0px;margin:0;}
+    .h_menu ul {float:left;margin-left:10px;font-size:1.5em;text-align:center;color:white;}
+    .h_menu ul:hover{color:crimson;text-decoration:underline;}
+   .footer{position:absolute;bottom:0;height:50px;width:100%;background:#09ADE4;}
+
+</style>
+<script>
+function kimera(){
+document.getElementById('bill_form').style.display = "block";
+}
+function kimera1(){
+document.getElementById('level_1').style.display = "block";
+document.getElementById('level_2').style.display = "block";
+document.getElementById('level_3').style.display = "block";
+}
+function kimera2(){
+document.getElementById('main_conf').style.display = "block";
+document.getElementById('check_conf').style.display = "block";
+}
+</script>
